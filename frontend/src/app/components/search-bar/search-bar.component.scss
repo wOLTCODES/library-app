@@ -1,0 +1,28 @@
+.search-bar {
+  margin-left: 270px;
+  margin-right: 50px;
+
+  &__input {
+    margin-top: 85px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-color: gainsboro;
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    padding-left: 30px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__icon {
+    margin-top: 94px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    opacity: 0.8;
+  }
+}
