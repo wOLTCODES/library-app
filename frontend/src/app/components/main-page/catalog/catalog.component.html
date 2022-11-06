@@ -1,4 +1,4 @@
-<table class="catalog">
+<table class="catalog catalog-scrollable">
   <thead class="catalog__header">
     <tr>
       <th class="catalog__header-border-top-left">Title</th>
@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let asset of assets">
       <td>test</td>
       <td>test</td>
       <td>test</td>
