@@ -12,6 +12,7 @@ import { PendingsComponent } from './components/main-page/pendings/pendings.comp
 import { UserBooksComponent } from './components/main-page/user-books/user-books.component';
 import { UserHistoryComponent } from './components/main-page/user-history/user-history.component';
 import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserProfileComponent } from './components/main-page/user-profile/user-p
     UserBooksComponent,
     UserHistoryComponent,
     UserProfileComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
