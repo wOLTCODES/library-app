@@ -1,6 +1,39 @@
 .sidebar {
-  width: calc(0% + 175px);
-  height: calc(100% - 50px);
-  box-shadow: #00000029 0px 1px 4px;
+  width: calc(0% + 220px);
+  height: 100%;
+  margin: 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   position: absolute;
+
+  &__person-icon {
+    height: 35px;
+    width: 35px;
+    opacity: 0.6;
+    border-radius: 50px;
+    margin-top: 35px;
+  }
+
+  &__user {
+    color: #899588;
+    margin-top: 5px;
+    margin-bottom: 25px;
+  }
+
+  &__item-center {
+    text-align: center;
+  }
+
+  &__empty-line {
+    background-color: #e4e4e4;
+    padding: 1px;
+    margin: 0 50px 25px 50px;
+  }
+
+  &__logout-icon {
+    cursor: pointer;
+    position: absolute;
+    bottom: 50px;
+    left: 45%;
+  }
 }
