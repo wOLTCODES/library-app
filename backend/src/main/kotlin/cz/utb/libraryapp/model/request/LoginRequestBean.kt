@@ -1,4 +1,4 @@
-package cz.utb.libraryapp.model
+package cz.utb.libraryapp.model.request
 
 data class LoginRequestBean(
     val username: String,

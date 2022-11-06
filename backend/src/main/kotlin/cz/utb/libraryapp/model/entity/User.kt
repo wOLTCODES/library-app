@@ -1,6 +1,7 @@
-package cz.utb.libraryapp.model
+package cz.utb.libraryapp.model.entity
 
-data class User(
+data class User (
+    val id: String,
     val username: String,
     val password: String,
     val repeatedPassword: String,

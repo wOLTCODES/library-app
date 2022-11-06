@@ -1,6 +1,6 @@
 package cz.utb.libraryapp.controller
 
-import cz.utb.libraryapp.model.Book
+import cz.utb.libraryapp.model.entity.Book
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -29,6 +29,11 @@ class BookController {
     }
 
     fun borrowBook(): ResponseEntity<Unit> {
+
+        return TODO("Provide the return value")
+    }
+
+    fun returnBook(): ResponseEntity<Unit> {
 
         return TODO("Provide the return value")
     }

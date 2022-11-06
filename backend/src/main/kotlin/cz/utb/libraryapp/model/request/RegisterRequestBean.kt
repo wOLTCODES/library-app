@@ -1,4 +1,4 @@
-package cz.utb.libraryapp.model
+package cz.utb.libraryapp.model.request
 
 data class RegisterRequestBean(
     val username: String,
