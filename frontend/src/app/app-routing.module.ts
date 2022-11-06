@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 import { CatalogComponent } from './components/main-page/catalog/catalog.component';
 import { PendingsComponent } from './components/main-page/pendings/pendings.component';
 import { UserBooksComponent } from './components/main-page/user-books/user-books.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'books', component: UserBooksComponent },
   { path: 'history', component: UserHistoryComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
