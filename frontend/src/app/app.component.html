@@ -1,5 +1,6 @@
-<div>
+<app-login *ngIf="router.url.includes('login')"></app-login>
+<div *ngIf="!router.url.includes('login')">
   <app-sidebar></app-sidebar>
   <app-search-bar></app-search-bar>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
