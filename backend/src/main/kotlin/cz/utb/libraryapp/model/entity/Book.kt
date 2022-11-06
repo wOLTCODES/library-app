@@ -7,5 +7,6 @@ data class Book (
     val pageNumber: String,
     val publishedYear: Int,
     val coverImg: String,
-    val copies: Int
+    val copies: Int,
+    val canBorrow: Boolean
 )

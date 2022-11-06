@@ -11,5 +11,6 @@ data class User (
     val address: String,
     val isAdmin: Boolean,
     val isBanned: Boolean,
-    val isReviewed: Boolean
+    val isReviewed: Boolean,
+    val numberOfBorrowedBooks: Int
 )
