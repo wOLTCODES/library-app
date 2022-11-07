@@ -1,5 +1,6 @@
 package cz.utb.libraryapp.facade
 
+import cz.utb.libraryapp.model.RoleEnum
 import cz.utb.libraryapp.model.entity.CustomUserDetails
 import cz.utb.libraryapp.model.request.EditUserRequestBean
 import cz.utb.libraryapp.model.request.RegisterRequestBean
@@ -40,7 +41,7 @@ class UserFacadeImpl(val userDetailsRepository: UserDetailsRepository, val bCryp
             accountNonExpired = true,
             credentialsNonExpired = true,
             accountNonLocked = true,
-            authorities = listOf(SimpleGrantedAuthority("USER")),
+            authorities = listOf(SimpleGrantedAuthority(RoleEnum.USER.name)),
             registerRequest.firstname,
             registerRequest.lastname,
             registerRequest.birthNumber,
