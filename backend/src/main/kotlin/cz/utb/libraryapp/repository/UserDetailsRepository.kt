@@ -7,4 +7,6 @@ import org.springframework.data.mongodb.repository.Query
 interface UserDetailsRepository: MongoRepository<CustomUserDetails, String> {
     @Query("{username: '?0'}")
     fun findCustomUserDetailsByUsername(username: String): CustomUserDetails?
+
+    fun findAllByReviewed(isReviewed: Boolean): List<CustomUserDetails>
 }

@@ -31,7 +31,10 @@ class UserController(val userFacade: UserFacade) {
 
     @GetMapping("/pending")
     fun getPendingUsers(): ResponseEntity<List<UserResponseBean>> {
-        //TODO:
+        val pendingUsers = userFacade.getPendingUsers()
+        return ResponseEntity(
+            ,
+            HttpStatus.OK)
     }
 
     @PostMapping("/register")
