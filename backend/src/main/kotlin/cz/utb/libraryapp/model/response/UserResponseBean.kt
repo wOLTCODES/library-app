@@ -1,7 +1,9 @@
-package cz.utb.libraryapp.model.entity
+package cz.utb.libraryapp.model.response
 
-data class User (
-    val id: String,
+import org.bson.types.ObjectId
+
+data class UserResponseBean (
+    val id: ObjectId,
     val username: String,
     val password: String,
     val repeatedPassword: String,
@@ -14,3 +16,4 @@ data class User (
     val isReviewed: Boolean,
     val numberOfBorrowedBooks: Int
 )
+
