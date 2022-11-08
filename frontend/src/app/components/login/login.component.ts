@@ -9,23 +9,25 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   public formData = new FormData();
 
-  @ViewChild('username') username: string;
-  @ViewChild('password') password: string;
+  @ViewChild('username') username: ElementRef;
+  @ViewChild('password') password: ElementRef;
 
   constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {}
 
   public submitLogin(): void {
-    const formData: FormData = new FormData();
-    formData.append('username', this.username);
-    formData.append('password', this.password);
+    console.log(this.username.nativeElement.value);
+
+    this.formData.append('username', this.username.nativeElement.value);
+    this.formData.append('password', this.password.nativeElement.value);
+
+    console.log(this.formData);
 
     this._http
-      .post('https://woltcodes.com/api/user/login', formData)
+      .post('https://woltcodes.com/knihovna/api/user/login', this.formData)
       .subscribe({
         next: (response) => console.log(response),
-        error: (error: HttpErrorResponse) => console.log(error),
       });
   }
 }
