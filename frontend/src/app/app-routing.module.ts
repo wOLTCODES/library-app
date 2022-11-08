@@ -7,6 +7,7 @@ import { UserBooksComponent } from './components/main-page/user-books/user-books
 import { UserHistoryComponent } from './components/main-page/user-history/user-history.component';
 import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
 import { UsersComponent } from './components/main-page/users/users.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: CatalogComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'history', component: UserHistoryComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

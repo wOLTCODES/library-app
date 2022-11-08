@@ -1,1 +1,13 @@
-<button routerLink="catalog">Login</button>
+<div class="login">
+  <label for="username">Username</label>
+  <input #username id="username" />
+  <br />
+  <label for="password">Password</label>
+  <input #password id="password" />
+  <br />
+  <button routerLink="catalog" (click)="submitLogin()">Login</button>
+  <br />
+  <br />
+  <span>no login?</span>
+  <button routerLink="register">go to register</button>
+</div>

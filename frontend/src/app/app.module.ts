@@ -13,6 +13,8 @@ import { UserBooksComponent } from './components/main-page/user-books/user-books
 import { UserHistoryComponent } from './components/main-page/user-history/user-history.component';
 import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
 import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,9 @@ import { LoginComponent } from './components/login/login.component';
     UserHistoryComponent,
     UserProfileComponent,
     LoginComponent,
+    RegisterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

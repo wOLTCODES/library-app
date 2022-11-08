@@ -1,5 +1,15 @@
 <app-login *ngIf="router.url.includes('login')"></app-login>
-<div *ngIf="!router.url.includes('login')">
+<app-register *ngIf="router.url.includes('register')"></app-register>
+<div
+  *ngIf="
+    router.url.includes('catalog') ||
+    router.url.includes('users') ||
+    router.url.includes('pendings') ||
+    router.url.includes('books') ||
+    router.url.includes('history') ||
+    router.url.includes('profile')
+  "
+>
   <app-sidebar></app-sidebar>
   <app-search-bar></app-search-bar>
   <router-outlet></router-outlet>
