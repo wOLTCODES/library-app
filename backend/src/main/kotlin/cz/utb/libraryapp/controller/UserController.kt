@@ -6,6 +6,7 @@ import cz.utb.libraryapp.model.request.EditUserRequestBean
 import cz.utb.libraryapp.model.request.RegisterRequestBean
 import cz.utb.libraryapp.model.response.UserResponseBean
 import cz.utb.libraryapp.repository.UserDetailsRepository
+import javax.servlet.http.HttpServletResponse
 import javax.websocket.server.PathParam
 import org.bson.types.ObjectId
 import org.springframework.http.HttpStatus
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -24,6 +27,18 @@ import org.springframework.web.server.ResponseStatusException
 @RestController
 @RequestMapping("/user")
 class UserController(val userFacade: UserFacade) {
+
+    @GetMapping("/login-redirect")
+    fun loginRedirect(servletResponse: HttpServletResponse): ResponseEntity<Unit> {
+        return ResponseEntity(
+            LinkedMultiValueMap(mutableMapOf(
+                "Location" to mutableListOf("")
+            )),
+            HttpStatus.UNAUTHORIZED
+        )
+
+    }
+
     @GetMapping("/")
     fun getAllUsers(): ResponseEntity<List<UserResponseBean>> {
         //TODO:
@@ -33,7 +48,7 @@ class UserController(val userFacade: UserFacade) {
     @GetMapping("/pending")
     fun getPendingUsers(): ResponseEntity<List<UserResponseBean>> {
         val pendingUsers = userFacade.getPendingUsers()
-
+        //pendingUsers.map { it -> it. }
         return ResponseEntity(HttpStatus.OK)
     }
 

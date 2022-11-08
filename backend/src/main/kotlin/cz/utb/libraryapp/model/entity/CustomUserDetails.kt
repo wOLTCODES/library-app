@@ -24,7 +24,6 @@ class CustomUserDetails(
     val isAdmin: Boolean,
     val isBanned: Boolean,
     val isReviewed: Boolean,
-    val numberOfBorrowedBooks: Int,
     @MongoId
     val id: ObjectId = ObjectId(),
 ) : User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities), UserDetails {

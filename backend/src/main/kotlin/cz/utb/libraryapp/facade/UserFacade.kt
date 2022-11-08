@@ -83,8 +83,7 @@ class UserFacadeImpl(
             registerRequest.address,
             isAdmin = false,
             isBanned = false,
-            isReviewed = false,
-            numberOfBorrowedBooks = 0
+            isReviewed = false
         )
 
         return userDetailsRepository.insert(customDetails).id

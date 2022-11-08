@@ -30,33 +30,39 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             .anyRequest().authenticated()
             .and()
             .formLogin()
-            .loginPage("/knihovna/login")
-            .loginProcessingUrl("/knihovna/api/user/login").permitAll()
+            .loginPage("/user/login-redirect")
+            .loginProcessingUrl("/user/login").permitAll()
             .successHandler { request, response, authentication ->
                 if(!(authentication.principal as CustomUserDetails).isReviewed) {
-                    response.sendRedirect("/knihovna/api/user/logout?error=USER_NOT_REVIEWED")
+                    response.setHeader("Location", "/knihovna/api/user/logout?error=USER_NOT_REVIEWED")
+                    response.sendError(401, "USER_NOT_REVIEWED")
                 } else if((authentication.principal as CustomUserDetails).isBanned) {
-                    response.sendRedirect("/knihovna/api/user/logout?error=USER_BANNED")
+                    response.setHeader("Location", "/knihovna/api/user/logout?error=USER_BANNED")
+                    response.sendError(401, "USER_BANNED")
                 } else {
-                    response.sendRedirect("/knihovna/catalog")
+                    response.status = 200
                 }
             }
             .failureHandler { request, response, exception ->
+                response.setHeader("Location", "/knihovna/login?error=LOGIN_FAILURE")
                 response.sendError(401, exception.message)
             }
             .usernameParameter("username")
             .passwordParameter("password")
             .and()
             .logout()
-            .logoutUrl("/knihovna/api/user/logout")
+            .logoutUrl("/user/logout")
             .deleteCookies("JSESSIONID")
             .logoutSuccessHandler { request, response, authentication ->
-                response.sendRedirect("/knihovna/login?${request.queryString}")
+                response.status = 200
             }
             .and()
             .exceptionHandling()
             .accessDeniedHandler{ request, response, exception->
                 response.sendError(403, exception.message)
+            }
+            .authenticationEntryPoint{ request, response, exception->
+                response.sendError(401, exception.message)
             }
             .and()
             .csrf().disable()
