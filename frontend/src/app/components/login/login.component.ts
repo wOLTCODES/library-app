@@ -28,29 +28,18 @@ export class LoginComponent implements OnInit {
 
     console.log(this.formData);
 
-    const httpOptions: { headers: any; observe: any } = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }),
-      observe: 'response',
-    };
-
     this._http
-      .post(
-        'https://woltcodes.com/knihovna/api/user/login',
-        this.formData,
-        { observe: 'response' }
-        // httpOptions
-      )
+      .post('https://woltcodes.com/knihovna/api/user/login', this.formData)
       .subscribe({
-        next: (response) => console.log(response),
-        // error: (error: any) => {
-        //   console.log(error);
-
-        //   if (error.status === 401) {
-        //     console.log(error.headers.get('location'));
-        //   }
-        // },
+        next: (response) => {
+          // route to catalog
+          // user is logged
+        },
+        error: (error: any) => {
+          if (error.status === 401) {
+            console.log(error.error.message);
+          }
+        },
       });
   }
 }
