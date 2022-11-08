@@ -26,19 +26,19 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.authorizeRequests()
-            .antMatchers("/user/register").permitAll()
+            .antMatchers("/knihovna/api/user/register").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/user/login").permitAll()
+            .loginPage("/knihovna/login")
+            .loginProcessingUrl("/knihovna/api/user/login").permitAll()
             .successHandler { request, response, authentication ->
                 if(!(authentication.principal as CustomUserDetails).isReviewed) {
-                    response.sendRedirect("/user/logout?error=USER_NOT_REVIEWED")
+                    response.sendRedirect("/knihovna/api/user/logout?error=USER_NOT_REVIEWED")
                 } else if((authentication.principal as CustomUserDetails).isBanned) {
-                    response.sendRedirect("/user/logout?error=USER_BANNED")
+                    response.sendRedirect("/knihovna/api/user/logout?error=USER_BANNED")
                 } else {
-                    response.sendRedirect("/catalog")
+                    response.sendRedirect("/knihovna/catalog")
                 }
             }
             .failureHandler { request, response, exception ->
@@ -48,10 +48,10 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             .passwordParameter("password")
             .and()
             .logout()
-            .logoutUrl("/user/logout")
+            .logoutUrl("/knihovna/api/user/logout")
             .deleteCookies("JSESSIONID")
             .logoutSuccessHandler { request, response, authentication ->
-                response.sendRedirect("/login?${request.queryString}")
+                response.sendRedirect("/knihovna/login?${request.queryString}")
             }
             .and()
             .exceptionHandling()

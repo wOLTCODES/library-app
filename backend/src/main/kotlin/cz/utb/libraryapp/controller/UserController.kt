@@ -27,19 +27,20 @@ class UserController(val userFacade: UserFacade) {
     @GetMapping("/")
     fun getAllUsers(): ResponseEntity<List<UserResponseBean>> {
         //TODO:
+        return ResponseEntity(HttpStatus.OK)
     }
 
     @GetMapping("/pending")
     fun getPendingUsers(): ResponseEntity<List<UserResponseBean>> {
         val pendingUsers = userFacade.getPendingUsers()
-        return ResponseEntity(
-            ,
-            HttpStatus.OK)
+
+        return ResponseEntity(HttpStatus.OK)
     }
 
     @PostMapping("/register")
     fun registerUser(@RequestBody registerRequest: RegisterRequestBean): ResponseEntity<String> {
         val insertedId = userFacade.registerUser(registerRequest)
+        //TODO: redirect to login
         return ResponseEntity(insertedId.toString(), HttpStatus.OK)
     }
 

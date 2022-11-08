@@ -40,22 +40,23 @@ class UserFacadeImpl(
         val pendingUsers = userDetailsRepository.findAllByReviewed(false)
         val currentlyBorrowed = currentlyRepository //TODO: count borrowed documents with userId
 
-        val users = pendingUsers.map {
-            pendingUsers.map {
-                UserResponseBean(
-                    it.id,
-                    it.username,
-                    it.firstname,
-                    it.lastname,
-                    it.birthNumber,
-                    it.address,
-                    it.isAdmin,
-                    it.isBanned,
-                    it.isReviewed,
-                    currentlyBorrowed
-                )
-            }
-        }
+//        val users = pendingUsers.map {
+//            pendingUsers.map {
+//                UserResponseBean(
+//                    it.id,
+//                    it.username,
+//                    it.firstname,
+//                    it.lastname,
+//                    it.birthNumber,
+//                    it.address,
+//                    it.isAdmin,
+//                    it.isBanned,
+//                    it.isReviewed,
+//                    currentlyBorrowed
+//                )
+//            }
+//        }
+        return emptyList()
     }
 
     override fun registerUser(registerRequest: RegisterRequestBean): ObjectId {
