@@ -1,5 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -24,10 +28,29 @@ export class LoginComponent implements OnInit {
 
     console.log(this.formData);
 
+    const httpOptions: { headers: any; observe: any } = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }),
+      observe: 'response',
+    };
+
     this._http
-      .post('https://woltcodes.com/knihovna/api/user/login', this.formData)
+      .post(
+        'https://woltcodes.com/knihovna/api/user/login',
+        this.formData,
+        { observe: 'response' }
+        // httpOptions
+      )
       .subscribe({
         next: (response) => console.log(response),
+        // error: (error: any) => {
+        //   console.log(error);
+
+        //   if (error.status === 401) {
+        //     console.log(error.headers.get('location'));
+        //   }
+        // },
       });
   }
 }
