@@ -45,7 +45,7 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             }
             .failureHandler { request, response, exception ->
                 response.setHeader("Location", "/knihovna/login?error=LOGIN_FAILURE")
-                response.sendError(401, exception.message)
+                response.sendError(401, "LOGIN_FAILED")
             }
             .usernameParameter("username")
             .passwordParameter("password")
@@ -59,10 +59,10 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             .and()
             .exceptionHandling()
             .accessDeniedHandler{ request, response, exception->
-                response.sendError(403, exception.message)
+                response.sendError(403, "ACCESS_DENIED")
             }
             .authenticationEntryPoint{ request, response, exception->
-                response.sendError(401, exception.message)
+                response.sendError(401, "NOT_LOGGED_IN")
             }
             .and()
             .csrf().disable()
