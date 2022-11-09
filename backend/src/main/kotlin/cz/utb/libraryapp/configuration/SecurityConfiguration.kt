@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 
@@ -26,7 +27,7 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.authorizeRequests()
-            .antMatchers("/knihovna/api/user/register").permitAll()
+            .antMatchers("/user/register").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
@@ -34,9 +35,13 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             .loginProcessingUrl("/user/login").permitAll()
             .successHandler { request, response, authentication ->
                 if(!(authentication.principal as CustomUserDetails).isReviewed) {
+                    SecurityContextHolder.getContext().authentication = null
+                    request.session.invalidate()
                     response.setHeader("Location", "/knihovna/api/user/logout?error=USER_NOT_REVIEWED")
                     response.sendError(401, "USER_NOT_REVIEWED")
                 } else if((authentication.principal as CustomUserDetails).isBanned) {
+                    SecurityContextHolder.getContext().authentication = null
+                    request.session.invalidate()
                     response.setHeader("Location", "/knihovna/api/user/logout?error=USER_BANNED")
                     response.sendError(401, "USER_BANNED")
                 } else {
@@ -44,6 +49,8 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
                 }
             }
             .failureHandler { request, response, exception ->
+                SecurityContextHolder.getContext().authentication = null
+                request.session.invalidate()
                 response.setHeader("Location", "/knihovna/login?error=LOGIN_FAILURE")
                 response.sendError(401, "LOGIN_FAILED")
             }
@@ -52,6 +59,7 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             .and()
             .logout()
             .logoutUrl("/user/logout")
+            .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID")
             .logoutSuccessHandler { request, response, authentication ->
                 response.status = 200
@@ -62,6 +70,8 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
                 response.sendError(403, "ACCESS_DENIED")
             }
             .authenticationEntryPoint{ request, response, exception->
+                SecurityContextHolder.getContext().authentication = null
+                request.session.invalidate()
                 response.sendError(401, "NOT_LOGGED_IN")
             }
             .and()

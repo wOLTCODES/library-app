@@ -36,20 +36,18 @@ class UserController(val userFacade: UserFacade) {
             )),
             HttpStatus.UNAUTHORIZED
         )
-
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     fun getAllUsers(): ResponseEntity<List<UserResponseBean>> {
-        //TODO:
-        return ResponseEntity(HttpStatus.OK)
+        val users = userFacade.getAllUsers()
+        return ResponseEntity(users, HttpStatus.OK)
     }
 
     @GetMapping("/pending")
     fun getPendingUsers(): ResponseEntity<List<UserResponseBean>> {
         val pendingUsers = userFacade.getPendingUsers()
-        //pendingUsers.map { it -> it. }
-        return ResponseEntity(HttpStatus.OK)
+        return ResponseEntity(pendingUsers, HttpStatus.OK)
     }
 
     @PostMapping("/register")

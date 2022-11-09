@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 interface UserFacade {
-    fun getAllUsers(): List<CustomUserDetails>
-    fun getPendingUsers(): List<CustomUserDetails>
+    fun getAllUsers(): List<UserResponseBean>
+    fun getPendingUsers(): List<UserResponseBean>
     fun registerUser(registerRequest: RegisterRequestBean): ObjectId
     fun editUser(userId: ObjectId, editUserRequest: EditUserRequestBean)
     fun reviewUser(userId: ObjectId)
@@ -32,31 +32,43 @@ class UserFacadeImpl(
     val currentlyRepository: BorrowedCurrentlyRepository,
     val bCryptPasswordEncoder: BCryptPasswordEncoder
 ): UserFacade {
-    override fun getAllUsers(): List<CustomUserDetails> {
-        return userDetailsRepository.findAll()
+    override fun getAllUsers(): List<UserResponseBean> {
+        val usersFromDb = userDetailsRepository.findAll()
+        val userIdBorrows = currentlyRepository.groupByUserId(usersFromDb.map { it.id.toString() })
+        return usersFromDb.map {
+            UserResponseBean(
+                it.id,
+                it.username,
+                it.firstname,
+                it.lastname,
+                it.birthNumber,
+                it.address,
+                it.isAdmin,
+                it.isBanned,
+                it.isReviewed,
+                userIdBorrows.firstOrNull { userIdBorrowCount -> userIdBorrowCount.id == it.id.toString() }?.count ?: 0
+            )
+        }
     }
 
-    override fun getPendingUsers(): List<CustomUserDetails> {
-        val pendingUsers = userDetailsRepository.findAllByReviewed(false)
-        val currentlyBorrowed = currentlyRepository //TODO: count borrowed documents with userId
+    override fun getPendingUsers(): List<UserResponseBean> {
+        val pendingUsers = userDetailsRepository.findAllByIsReviewed(false)
+        val userIdBorrows = currentlyRepository.groupByUserId(pendingUsers.map { it.id.toString() })
 
-//        val users = pendingUsers.map {
-//            pendingUsers.map {
-//                UserResponseBean(
-//                    it.id,
-//                    it.username,
-//                    it.firstname,
-//                    it.lastname,
-//                    it.birthNumber,
-//                    it.address,
-//                    it.isAdmin,
-//                    it.isBanned,
-//                    it.isReviewed,
-//                    currentlyBorrowed
-//                )
-//            }
-//        }
-        return emptyList()
+        return pendingUsers.map {
+            UserResponseBean(
+                it.id,
+                it.username,
+                it.firstname,
+                it.lastname,
+                it.birthNumber,
+                it.address,
+                it.isAdmin,
+                it.isBanned,
+                it.isReviewed,
+                userIdBorrows.firstOrNull { userIdBorrowCount -> userIdBorrowCount.id == it.id.toString() }?.count ?: 0
+            )
+        }
     }
 
     override fun registerUser(registerRequest: RegisterRequestBean): ObjectId {
@@ -90,27 +102,43 @@ class UserFacadeImpl(
     }
 
     override fun editUser(userId: ObjectId, editUserRequest: EditUserRequestBean) {
-        TODO("Not yet implemented")
+        userDetailsRepository.save(CustomUserDetails(
+            editUserRequest.username,
+            editUserRequest.password,
+            enabled = true,
+            accountNonExpired = true,
+            credentialsNonExpired = true,
+            accountNonLocked = true,
+            authorities = listOf(SimpleGrantedAuthority(RoleEnum.USER.name)),
+            editUserRequest.firstname,
+            editUserRequest.lastname,
+            editUserRequest.birthNumber,
+            editUserRequest.address,
+            isAdmin = false,
+            isBanned = false,
+            isReviewed = false,
+            userId
+        ))
     }
 
     override fun reviewUser(userId: ObjectId) {
-        TODO("Not yet implemented")
+        userDetailsRepository.findAndSetIsReviewedById(userId, true)
     }
 
     override fun banUser(userId: ObjectId) {
-        TODO("Not yet implemented")
+        userDetailsRepository.findAndSetIsBannedById(userId, true)
     }
 
     override fun unbanUser(userId: ObjectId) {
-        TODO("Not yet implemented")
+        userDetailsRepository.findAndSetIsBannedById(userId, false)
     }
 
     override fun promoteUser(userId: ObjectId) {
-        TODO("Not yet implemented")
+        userDetailsRepository.findAndSetIsAdminById(userId, true)
     }
 
     override fun demoteUser(userId: ObjectId) {
-        TODO("Not yet implemented")
+        userDetailsRepository.findAndSetIsAdminById(userId, false)
     }
 
 }

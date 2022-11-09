@@ -64,6 +64,16 @@ class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRe
     }
 
     override fun borrowBook(bookId: ObjectId) {
+        val book = bookRepository.findById(bookId.toString())
+        if (book.isEmpty) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "The book ${bookId} does not exist")
+        }
+
+        val borrowedCoppiesOfTheBook = borrowedCurrentlyRepository.findAllByBookId(bookId.toString())
+        if (borrowedCoppiesOfTheBook.count() >= book.get().copies) {
+            throw ResponseStatusException(HttpStatus.CONFLICT, "There are no more copies in the inventory")
+        }
+
         val auth = (SecurityContextHolder.getContext()?.authentication?.principal as CustomUserDetails?) ?: throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User is not logged in")
         val alreadyBorrowed = borrowedCurrentlyRepository.findByUserIdAndBookId(auth.id.toString(), bookId.toString())
         if (alreadyBorrowed != null) {
@@ -81,10 +91,10 @@ class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRe
 
     }
 
-    //TODO: Maybe borrow controller?
     override fun returnBook(bookId: ObjectId) {
-        //TODO: delete currently borrowed and update borrowhistory with returned at
-        TODO("Not yet implemented")
+        val auth = (SecurityContextHolder.getContext()?.authentication?.principal as CustomUserDetails?) ?: throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User is not logged in")
+        borrowedCurrentlyRepository.deleteByUserIdAndBookId(auth.id.toString(), bookId.toString())
+        borrowHistoryRepository.findAndSetReturnedAtByUserIdAndBookId(auth.id.toString(), bookId.toString())
     }
 
     override fun deleteBook(bookId: ObjectId) {
