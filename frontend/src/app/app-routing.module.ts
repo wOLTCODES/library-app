@@ -10,7 +10,7 @@ import { UsersComponent } from './components/main-page/users/users.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: CatalogComponent },
+  { path: '', redirectTo: 'catalog', pathMatch: 'full' },
   { path: 'catalog', component: CatalogComponent },
   { path: 'users', component: UsersComponent },
   { path: 'pendings', component: PendingsComponent },
@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '**', component: CatalogComponent}
 ];
 
 @NgModule({

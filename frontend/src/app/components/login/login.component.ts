@@ -4,6 +4,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,33 +12,29 @@ import {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public formData = new FormData();
-
   @ViewChild('username') username: ElementRef;
   @ViewChild('password') password: ElementRef;
 
-  constructor(private _http: HttpClient) {}
+  public errors: string[] = []
+
+  constructor(private _http: HttpClient, private _router: Router) {}
 
   ngOnInit(): void {}
 
   public submitLogin(): void {
-    console.log(this.username.nativeElement.value);
-
-    this.formData.append('username', this.username.nativeElement.value);
-    this.formData.append('password', this.password.nativeElement.value);
-
-    console.log(this.formData);
+    const formData = new FormData();
+    formData.append('username', this.username.nativeElement.value);
+    formData.append('password', this.password.nativeElement.value);
 
     this._http
-      .post('https://woltcodes.com/knihovna/api/user/login', this.formData)
+      .post('/knihovna/api/user/login', formData, {observe: 'response'})
       .subscribe({
         next: (response) => {
-          // route to catalog
-          // user is logged
+          this._router.navigate(['catalog'])
         },
         error: (error: any) => {
           if (error.status === 401) {
-            console.log(error.error.message);
+            this.errors.push(error.error.message)
           }
         },
       });
