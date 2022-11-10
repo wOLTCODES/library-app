@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/book")
 class BookController(val bookFacade: BookFacade) {
-    @GetMapping("/")
+    @GetMapping("")
     fun getAllBooks(): ResponseEntity<List<Book>> {
         val books = bookFacade.getAllBooks()
         return ResponseEntity(books, HttpStatus.OK)

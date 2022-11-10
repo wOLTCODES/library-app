@@ -1,13 +1,9 @@
-<div class="error-message" *ngFor="let error of errors">
-  {{ error }}
-</div>
-
 <div class="login">
   <label for="username">Username</label>
   <input #username id="username" />
   <br />
   <label for="password">Password</label>
-  <input #password id="password" />
+  <input #password id="password" type="password"/>
   <br />
   <button (click)="submitLogin()">Login</button>
   <br />

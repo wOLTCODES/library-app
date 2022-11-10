@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-catalog',
@@ -131,7 +132,39 @@ export class CatalogComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {}
+
+  fetch() {
+    //fetch all books
+    this._http
+      .get('/knihovna/api/book', {observe: 'response'})
+      .subscribe({
+        next: (response) => {
+
+        },
+        error: (error: any) => {
+          if (error.status === 401) {
+
+          }
+        },
+      });
+  }
+
+  borrow() {
+    //borrow a book
+    this._http
+      .get('/knihovna/api/book/borrow/<book_id>', {observe: 'response'})
+      .subscribe({
+        next: (response) => {
+
+        },
+        error: (error: any) => {
+          if (error.status === 401) {
+
+          }
+        },
+      });
+  }
 }

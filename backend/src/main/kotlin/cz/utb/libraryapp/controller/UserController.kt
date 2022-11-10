@@ -4,6 +4,7 @@ import cz.utb.libraryapp.facade.UserFacade
 import cz.utb.libraryapp.model.entity.CustomUserDetails
 import cz.utb.libraryapp.model.request.EditUserRequestBean
 import cz.utb.libraryapp.model.request.RegisterRequestBean
+import cz.utb.libraryapp.model.response.NumberOfPendingUsersResponseBean
 import cz.utb.libraryapp.model.response.UserResponseBean
 import cz.utb.libraryapp.repository.UserDetailsRepository
 import javax.servlet.http.HttpServletResponse
@@ -48,6 +49,12 @@ class UserController(val userFacade: UserFacade) {
     fun getPendingUsers(): ResponseEntity<List<UserResponseBean>> {
         val pendingUsers = userFacade.getPendingUsers()
         return ResponseEntity(pendingUsers, HttpStatus.OK)
+    }
+
+    @GetMapping("/pending/number")
+    fun getNumberOfPendingUsers(): ResponseEntity<NumberOfPendingUsersResponseBean> {
+        val pendingUsers = userFacade.getPendingUsers()
+        return ResponseEntity(NumberOfPendingUsersResponseBean(pendingUsers.count()), HttpStatus.OK)
     }
 
     @PostMapping("/register")

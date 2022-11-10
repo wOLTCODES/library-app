@@ -42,13 +42,13 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
                     SecurityContextHolder.getContext().authentication = null
                     request.session.invalidate()
                     response.status = HttpServletResponse.SC_UNAUTHORIZED
-                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("USER_NOT_REVIEWED")).toByteArray())
+                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("Your registration has not been reviewed yet")).toByteArray())
                     response.outputStream.flush()
                 } else if((authentication.principal as CustomUserDetails).isBanned) {
                     SecurityContextHolder.getContext().authentication = null
                     request.session.invalidate()
                     response.status = HttpServletResponse.SC_UNAUTHORIZED
-                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("USER_BANNED")).toByteArray())
+                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("You are banned :)")).toByteArray())
                     response.outputStream.flush()
                 } else {
                     response.status = 200
@@ -59,9 +59,9 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
                 request.session.invalidate()
                 response.status = HttpServletResponse.SC_UNAUTHORIZED
                 if (exception.cause != null && exception.cause is EmptyResultDataAccessException) {
-                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("NO_LOGIN_PASSWORD_COMBO")).toByteArray())
+                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("The combination of username and password doesn't exist")).toByteArray())
                 } else {
-                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("LOGIN_FAILURE")).toByteArray())
+                    response.outputStream.write(mapper.writeValueAsString(ErrorResponse("There was an error while trying to login")).toByteArray())
                 }
                 response.outputStream.flush()
             }
@@ -79,14 +79,14 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
             .exceptionHandling()
             .accessDeniedHandler{ request, response, exception->
                 response.status = HttpServletResponse.SC_FORBIDDEN
-                response.outputStream.write(mapper.writeValueAsString(ErrorResponse("USER_DOES_NOT_HAVE_PROPER_RIGHTS")).toByteArray())
+                response.outputStream.write(mapper.writeValueAsString(ErrorResponse("You do not have the proper rights to do this action")).toByteArray())
                 response.outputStream.flush()
             }
             .authenticationEntryPoint{ request, response, exception->
                 SecurityContextHolder.getContext().authentication = null
                 request.session.invalidate()
                 response.status = HttpServletResponse.SC_UNAUTHORIZED
-                response.outputStream.write(mapper.writeValueAsString(ErrorResponse("USER_NOT_LOGGED_IN")).toByteArray())
+                response.outputStream.write(mapper.writeValueAsString(ErrorResponse("You are not logged in")).toByteArray())
                 response.outputStream.flush()
             }
             .and()
