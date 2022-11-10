@@ -1,26 +1,18 @@
-<div class="border">
-  <div class="tableFix">
-    <table class="catalog">
-      <thead class="catalog__header">
-        <tr>
-          <th class="catalog__header-border-top-left">Title</th>
-          <th>Name</th>
-          <th>Author</th>
-          <th>Number of pages</th>
-          <th>Year of publication</th>
-          <th class="catalog__header-border-top-right">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let asset of assets">
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="table" role="table">
+  <div class="table__head" role="rowgroup">
+    <div class="table__cell" role="columnheader">Title</div>
+    <div class="table__cell" role="columnheader">Name</div>
+    <div class="table__cell" role="columnheader">Author</div>
+    <div class="table__cell" role="columnheader">Number of pages</div>
+    <div class="table__cell" role="columnheader">Year of publication</div>
+    <div class="table__cell" role="columnheader">Actions</div>
+  </div>
+  <div class="table__body">
+    <div class="table__list">
+      <app-catalog-item
+        *ngFor="let asset of assets"
+        [asset]="asset"
+      ></app-catalog-item>
+    </div>
   </div>
 </div>
