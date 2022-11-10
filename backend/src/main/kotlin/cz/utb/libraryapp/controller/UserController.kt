@@ -39,7 +39,7 @@ class UserController(val userFacade: UserFacade) {
         )
     }
 
-    @GetMapping("")
+    @GetMapping
     fun getAllUsers(): ResponseEntity<List<UserResponseBean>> {
         val users = userFacade.getAllUsers()
         return ResponseEntity(users, HttpStatus.OK)

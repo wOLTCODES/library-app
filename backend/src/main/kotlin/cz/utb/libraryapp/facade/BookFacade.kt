@@ -5,6 +5,7 @@ import cz.utb.libraryapp.model.entity.BorrowHistory
 import cz.utb.libraryapp.model.entity.BorrowedCurrently
 import cz.utb.libraryapp.model.entity.CustomUserDetails
 import cz.utb.libraryapp.model.request.BookRequestBean
+import cz.utb.libraryapp.model.response.BookResponseBean
 import cz.utb.libraryapp.repository.BookRepository
 import cz.utb.libraryapp.repository.BorrowHistoryRepository
 import cz.utb.libraryapp.repository.BorrowedCurrentlyRepository
@@ -16,8 +17,8 @@ import org.springframework.web.server.ResponseStatusException
 
 
 interface BookFacade {
-    fun getAllBooks(): List<Book>
-    fun getBorrowedBooks(): List<Book>
+    fun getAllBooks(): List<BookResponseBean>
+    fun getBorrowedBooks(): List<BookResponseBean>
     fun insertBook(book: BookRequestBean): ObjectId
     fun editBook(bookId: ObjectId, book: BookRequestBean)
     fun borrowBook(bookId: ObjectId)
@@ -27,12 +28,38 @@ interface BookFacade {
 
 @Service
 class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRepository: BorrowedCurrentlyRepository, val borrowHistoryRepository: BorrowHistoryRepository): BookFacade {
-    override fun getAllBooks(): List<Book> {
-        return bookRepository.findAll()
+    override fun getAllBooks(): List<BookResponseBean> {
+        val books = bookRepository.findAll()
+        val group = borrowedCurrentlyRepository.groupByBookId(books.map { it.id.toString() })
+        return books.map { BookResponseBean(
+            it.id,
+            it.name,
+            it.author,
+            it.pageNumber,
+            it.publishedYear,
+            it.coverImg,
+            it.copies,
+            group.firstOrNull{ group -> group.id == it.id.toString() }?.run {
+                return@run this.count < it.copies
+            } ?: true
+        ) }
     }
 
-    override fun getBorrowedBooks(): List<Book> {
-        return bookRepository.findAll()
+    override fun getBorrowedBooks(): List<BookResponseBean> {
+        val books = bookRepository.findAll()
+        val group = borrowedCurrentlyRepository.groupByBookId(books.map { it.id.toString() })
+        return books.map { BookResponseBean(
+            it.id,
+            it.name,
+            it.author,
+            it.pageNumber,
+            it.publishedYear,
+            it.coverImg,
+            it.copies,
+            group.firstOrNull{ group -> group.id == it.id.toString() }?.run {
+                return@run this.count < it.copies
+            } ?: true
+        ) }
     }
 
     override fun insertBook(book: BookRequestBean): ObjectId {

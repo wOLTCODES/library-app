@@ -1,13 +1,9 @@
 package cz.utb.libraryapp.repository
 
-import cz.utb.libraryapp.model.entity.AggregateGroupByUserId
-import cz.utb.libraryapp.model.entity.BorrowHistory
+import cz.utb.libraryapp.model.entity.AggregateGroupBy
 import cz.utb.libraryapp.model.entity.BorrowedCurrently
-import java.time.Instant
-import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.Aggregation
 import org.springframework.data.mongodb.repository.MongoRepository
-import org.springframework.data.mongodb.repository.Update
 
 interface BorrowedCurrentlyRepository: MongoRepository<BorrowedCurrently,String> {
     fun findByUserIdAndBookId(userId: String, bookId: String): BorrowedCurrently?
@@ -22,7 +18,13 @@ interface BorrowedCurrentlyRepository: MongoRepository<BorrowedCurrently,String>
         "{ \$match: { '\$expr': { '\$in': [ '\$userId', ?0 ] }}}",
         "{ \$group: { _id: '\$userId', count: { \$sum: 1 }}}"
     ])
-    fun groupByUserId(userIds: List<String>): List<AggregateGroupByUserId>
+    fun groupByUserId(userIds: List<String>): List<AggregateGroupBy>
+
+    @Aggregation(pipeline = [
+        "{ \$match: { '\$expr': { '\$in': [ '\$bookId', ?0 ] }}}",
+        "{ \$group: { _id: '\$bookId', count: { \$sum: 1 }}}"
+    ])
+    fun groupByBookId(bookIds: List<String>): List<AggregateGroupBy>
 
     fun deleteByUserIdAndBookId(userId: String, bookId: String)
 }

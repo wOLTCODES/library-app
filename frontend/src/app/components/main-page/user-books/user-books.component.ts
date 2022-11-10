@@ -12,4 +12,20 @@ export class UserBooksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  fetch() {
+    //fetch all books
+    this._http
+      .get('/knihovna/api/borrow/my', {observe: 'response'})
+      .subscribe({
+        next: (response) => {
+          console.log(response)
+        },
+        error: (error: any) => {
+          if (error.status === 401) {
+
+          }
+        },
+      });
+  }
+
 }

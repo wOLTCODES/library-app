@@ -12,4 +12,20 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  fetch() {
+    //fetch all books
+    this._http
+      .get('/knihovna/api/borrow/history/<userid>', {observe: 'response'})
+      .subscribe({
+        next: (response) => {
+          console.log(response)
+        },
+        error: (error: any) => {
+          if (error.status === 401) {
+
+          }
+        },
+      });
+  }
+
 }

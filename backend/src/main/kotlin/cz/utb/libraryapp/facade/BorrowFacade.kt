@@ -1,6 +1,6 @@
 package cz.utb.libraryapp.facade
 
-import cz.utb.libraryapp.model.entity.AggregateGroupByUserId
+import cz.utb.libraryapp.model.entity.AggregateGroupBy
 import cz.utb.libraryapp.model.entity.BorrowHistory
 import cz.utb.libraryapp.model.entity.BorrowedCurrently
 import cz.utb.libraryapp.model.entity.CustomUserDetails
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 interface BorrowFacade {
-    fun getCurrentlyBorrowedBooksForUserIds(userIds: List<String>): List<AggregateGroupByUserId>
+    fun getCurrentlyBorrowedBooksForUserIds(userIds: List<String>): List<AggregateGroupBy>
     fun getBorrowedCurrentlyForUserId(): List<BorrowedCurrently>
     fun getBorrowHistoryForUserId(): List<BorrowHistory>
     fun getBorrowHistory(): List<BorrowHistory>
@@ -23,7 +23,7 @@ class BorrowFacadeImpl(
     val borrowHistoryRepository: BorrowHistoryRepository,
     val borrowedCurrentlyRepository: BorrowedCurrentlyRepository
 ): BorrowFacade {
-    override fun getCurrentlyBorrowedBooksForUserIds(userIds: List<String>): List<AggregateGroupByUserId> {
+    override fun getCurrentlyBorrowedBooksForUserIds(userIds: List<String>): List<AggregateGroupBy> {
         return borrowedCurrentlyRepository.groupByUserId(userIds)
     }
 

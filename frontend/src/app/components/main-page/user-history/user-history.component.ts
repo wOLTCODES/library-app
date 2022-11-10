@@ -12,4 +12,19 @@ export class UserHistoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  fetch() {
+    //fetch all books
+    this._http
+      .get('/knihovna/api/borrow/history/all', {observe: 'response'})
+      .subscribe({
+        next: (response) => {
+          console.log(response)
+        },
+        error: (error: any) => {
+          if (error.status === 401) {
+
+          }
+        },
+      });
+  }
 }

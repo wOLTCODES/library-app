@@ -134,7 +134,9 @@ export class CatalogComponent implements OnInit {
 
   constructor(private _http: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetch()
+  }
 
   fetch() {
     //fetch all books
@@ -142,7 +144,7 @@ export class CatalogComponent implements OnInit {
       .get('/knihovna/api/book', {observe: 'response'})
       .subscribe({
         next: (response) => {
-
+          console.log(response)
         },
         error: (error: any) => {
           if (error.status === 401) {
@@ -158,7 +160,7 @@ export class CatalogComponent implements OnInit {
       .get('/knihovna/api/book/borrow/<book_id>', {observe: 'response'})
       .subscribe({
         next: (response) => {
-
+          console.log(response)
         },
         error: (error: any) => {
           if (error.status === 401) {

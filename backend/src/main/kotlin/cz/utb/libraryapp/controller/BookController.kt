@@ -3,6 +3,7 @@ package cz.utb.libraryapp.controller
 import cz.utb.libraryapp.facade.BookFacade
 import cz.utb.libraryapp.model.entity.Book
 import cz.utb.libraryapp.model.request.BookRequestBean
+import cz.utb.libraryapp.model.response.BookResponseBean
 import org.bson.types.ObjectId
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/book")
 class BookController(val bookFacade: BookFacade) {
-    @GetMapping("")
-    fun getAllBooks(): ResponseEntity<List<Book>> {
+    @GetMapping
+    fun getAllBooks(): ResponseEntity<List<BookResponseBean>> {
         val books = bookFacade.getAllBooks()
         return ResponseEntity(books, HttpStatus.OK)
     }
 
     @GetMapping("/borrowed")
-    fun getBorrowedBooks(): ResponseEntity<List<Book>> {
+    fun getBorrowedBooks(): ResponseEntity<List<BookResponseBean>> {
         val books = bookFacade.getBorrowedBooks()
         return ResponseEntity(books, HttpStatus.OK)
     }
