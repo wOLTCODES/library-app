@@ -5,6 +5,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import {Router} from "@angular/router";
+import {UserServiceService} from "../../services/user-service.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   private _messageIdIterator = 0
 
-  constructor(private _http: HttpClient, private _router: Router, private _renderer: Renderer2, private _element:ElementRef) {}
+  constructor(private _http: HttpClient, private _router: Router, private _renderer: Renderer2, private _element:ElementRef, private _userService: UserServiceService) {}
 
   ngOnInit(): void {}
 
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
       .post('/knihovna/api/user/login', formData, {observe: 'response'})
       .subscribe({
         next: (response) => {
+          this._userService.updateUser()
           this._router.navigate(['catalog'])
         },
         error: (error: any) => {

@@ -1,14 +1,14 @@
 <div class="sidebar">
   <div class="sidebar__item-center">
     <img src="assets/images/person-icon.png" class="sidebar__person-icon" />
-    <p class="sidebar__user">{{user.username}}</p>
+    <p class="sidebar__user">{{userService.getUser().username}}</p>
     <p class="sidebar__empty-line"></p>
   </div>
   <app-sidebar-item title="Book catalog" routerLink="catalog"></app-sidebar-item>
-  <app-sidebar-item *ngIf="user.isAdmin" title="Users" routerLink="users"></app-sidebar-item>
-  <app-sidebar-item *ngIf="user.isAdmin"title="Pendings" routerLink="pendings"></app-sidebar-item><span *ngIf="user.isAdmin">( number of pendings: {{ numberOfPendings }} )</span>
+  <app-sidebar-item *ngIf="userService.getUser().isAdmin" title="Users" routerLink="users"></app-sidebar-item>
+  <app-sidebar-item *ngIf="userService.getUser().isAdmin" title="Pendings" routerLink="pendings"></app-sidebar-item><span *ngIf="userService.getUser().isAdmin">( number of pendings: {{ numberOfPendings }} )</span>
   <app-sidebar-item title="Admin/User actual borrow books" routerLink="books"></app-sidebar-item>
-  <app-sidebar-item *ngIf="user.isAdmin"title="User history books" routerLink="history"></app-sidebar-item>
+  <app-sidebar-item *ngIf="userService.getUser().isAdmin" title="User history books" routerLink="history"></app-sidebar-item>
   <app-sidebar-item title="My profile" routerLink="profile"></app-sidebar-item>
   <div class="sidebar__item-center">
     <img

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {BorrowHistory} from "../../../model/BorrowHistory";
 
 @Component({
   selector: 'app-user-history',
@@ -7,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./user-history.component.scss']
 })
 export class UserHistoryComponent implements OnInit {
-
+  public borrows: BorrowHistory[]
   constructor(private _http: HttpClient) { }
 
   ngOnInit(): void {
@@ -17,10 +18,12 @@ export class UserHistoryComponent implements OnInit {
   fetch() {
     //fetch all books
     this._http
-      .get('/knihovna/api/borrow/history/all', {observe: 'response'})
+      .get<BorrowHistory[]>('/knihovna/api/borrow/history/all', {observe: 'response'})
       .subscribe({
         next: (response) => {
-          console.log(response)
+          let borrows = response.body
+          if (borrows == null) throw new Error('No body')
+          this.borrows = borrows
         },
         error: (error: any) => {
 

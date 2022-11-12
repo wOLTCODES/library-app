@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {User} from "../../model/User";
 import {AppComponent} from "../../app.component";
+import {UserServiceService} from "../../services/user-service.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -12,31 +13,13 @@ import {AppComponent} from "../../app.component";
 export class SidebarComponent implements OnInit {
 
   public numberOfPendings: number = 0
-  public user: User = {} as User
 
-  constructor(private _http: HttpClient, private _router: Router) {}
+  constructor(private _http: HttpClient, private _router: Router, public userService: UserServiceService) {}
 
   ngOnInit(): void {
-    this.fetchCurrentUserInfo()
+
     this.fetchNumberOfPendings()
     this.initInterval()
-  }
-
-  fetchCurrentUserInfo() {
-    this._http
-      .get<User>('/knihovna/api/user/current-user', {observe: 'response'})
-      .subscribe({
-        next: (response) => {
-          let user = response.body
-          if (user == null) {
-            throw new Error('No body')
-          }
-          this.user = user
-        },
-        error: (error: any) => {
-
-        },
-      });
   }
 
   fetchNumberOfPendings() {

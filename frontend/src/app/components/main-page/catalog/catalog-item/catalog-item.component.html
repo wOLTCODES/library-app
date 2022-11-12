@@ -17,6 +17,8 @@
   <div class="table__cell" role="cell">
     <span>
       <fa-icon [icon]="faBorrow" (click)="this.borrow(book.id)"></fa-icon>
+      <fa-icon [icon]="faPencil" (click)="this.edit(book.id)"></fa-icon>
+      <fa-icon [icon]="faTrash" (click)="this.delete(book.id)"></fa-icon>
     </span>
   </div>
 </div>

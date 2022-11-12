@@ -1,0 +1,15 @@
+.table__cell {
+  flex: 1;
+}
+
+.table__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid black;
+}
+
+fa-icon {
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {User} from "../../../model/User";
 
 @Component({
   selector: 'app-pendings',
@@ -7,6 +8,8 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./pendings.component.scss']
 })
 export class PendingsComponent implements OnInit {
+
+  public users: User[]
 
   constructor(private _http: HttpClient) { }
 
@@ -17,10 +20,12 @@ export class PendingsComponent implements OnInit {
   fetch() {
     //fetch all books
     this._http
-      .get('/knihovna/api/user/pending', {observe: 'response'})
+      .get<User[]>('/knihovna/api/user/pending', {observe: 'response'})
       .subscribe({
         next: (response) => {
-          console.log(response)
+          let users = response.body
+          if (users == null) throw new Error('No body')
+          this.users = users
         },
         error: (error: any) => {
 

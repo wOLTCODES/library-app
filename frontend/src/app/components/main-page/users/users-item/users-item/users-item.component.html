@@ -1,0 +1,31 @@
+<div class="table__row">
+  <div class="table__cell" role="cell">
+    <span>{{ user.username }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>{{ user.firstname }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>{{ user.lastname }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>{{ user.address }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>{{ user.birthNumber }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>{{ user.isAdmin }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>{{ user.isBanned }}</span>
+  </div>
+  <div class="table__cell" role="cell">
+    <span>
+      <fa-icon [icon]="faUp" title="promote"></fa-icon>
+      <fa-icon [icon]="faDown" title="demote"></fa-icon>
+      <fa-icon [icon]="faBan" title="ban"></fa-icon>
+      <fa-icon [icon]="faUnban" title="unban"></fa-icon>
+    </span>
+  </div>
+</div>

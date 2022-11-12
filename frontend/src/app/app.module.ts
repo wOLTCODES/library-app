@@ -18,6 +18,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { CatalogItemComponent } from './components/main-page/catalog/catalog-item/catalog-item.component';
 import {GlobalHttpInterceptorServiceInterceptor} from "./interceptors/global-http-interceptor-service.interceptor";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PendingsItemComponent } from './components/main-page/pendings/pendings-item/pendings-item/pendings-item.component';
+import { UserBooksItemComponent } from './components/main-page/user-books/user-books-item/user-books-item/user-books-item.component';
+import { UserHistoryItemComponent } from './components/main-page/user-history/user-history-item/user-history-item/user-history-item.component';
+import { UsersItemComponent } from './components/main-page/users/users-item/users-item/users-item.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     RegisterComponent,
     CatalogItemComponent,
+    PendingsItemComponent,
+    UserBooksItemComponent,
+    UserHistoryItemComponent,
+    UsersItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
   providers: [
