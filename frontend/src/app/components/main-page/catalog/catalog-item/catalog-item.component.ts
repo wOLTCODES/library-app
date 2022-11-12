@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {faArrowRightFromBracket, faBackward, faBookBookmark, faBookmark, faStepBackward} from "@fortawesome/free-solid-svg-icons";
 import {HttpClient} from "@angular/common/http";
+import {Book} from "../../../../model/Book";
 
 @Component({
   selector: 'app-catalog-item',
@@ -8,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./catalog-item.component.scss'],
 })
 export class CatalogItemComponent implements OnInit {
-  @Input() asset: any;
+  @Input() book: Book;
 
   faBorrow = faBookBookmark
 

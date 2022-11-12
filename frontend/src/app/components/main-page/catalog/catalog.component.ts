@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Book} from "../../../model/Book";
 
 @Component({
   selector: 'app-catalog',
@@ -9,128 +10,7 @@ import {HttpClient} from "@angular/common/http";
 export class CatalogComponent implements OnInit {
   @Input() title = '';
 
-  public assets = [
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-    {
-      title: 'Title',
-      name: 'Kniha',
-      author: 'Karel',
-      numberOfPages: 5,
-      yearOfPublication: 2031,
-      actions: '',
-    },
-  ];
+  public books: Book[]
 
   constructor(private _http: HttpClient) {}
 
@@ -141,10 +21,14 @@ export class CatalogComponent implements OnInit {
   fetch() {
     //fetch all books
     this._http
-      .get('/knihovna/api/book', {observe: 'response'})
+      .get<Book[]>('/knihovna/api/book', {observe: 'response'})
       .subscribe({
         next: (response) => {
-          console.log(response)
+          let books = response.body
+          if (books == null) {
+            throw new Error('No body')
+          }
+          this.books = books
         },
         error: (error: any) => {
 
