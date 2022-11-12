@@ -6,10 +6,10 @@
     <span>{{ borrow.userId }}</span>
   </div>
   <div class="table__cell" role="cell">
-    <span>{{ borrow.createdAt }}</span>
+    <span>{{ borrow.createdAt | date }}</span>
   </div>
   <div class="table__cell" role="cell">
-    <span>{{ borrow.returnedAt }}</span>
+    <span>{{ borrow.returnedAt | date }}</span>
   </div>
   <div class="table__cell" role="cell">
     <span>
