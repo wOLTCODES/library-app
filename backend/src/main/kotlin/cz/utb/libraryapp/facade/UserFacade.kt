@@ -10,12 +10,14 @@ import cz.utb.libraryapp.repository.UserDetailsRepository
 import org.bson.types.ObjectId
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 interface UserFacade {
     fun getAllUsers(): List<UserResponseBean>
+    fun getCurrentUserInfo(): UserResponseBean
     fun getPendingUsers(): List<UserResponseBean>
     fun registerUser(registerRequest: RegisterRequestBean): ObjectId
     fun editUser(userId: ObjectId, editUserRequest: EditUserRequestBean)
@@ -49,6 +51,23 @@ class UserFacadeImpl(
                 userIdBorrows.firstOrNull { userIdBorrowCount -> userIdBorrowCount.id == it.id.toString() }?.count ?: 0
             )
         }
+    }
+
+    override fun getCurrentUserInfo(): UserResponseBean {
+        val auth = (SecurityContextHolder.getContext()?.authentication?.principal as CustomUserDetails?) ?: throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User is not logged in")
+        val userIdBorrows = currentlyRepository.groupByUserId(listOf(auth.id.toString()))
+        return UserResponseBean(
+            auth.id,
+            auth.username,
+            auth.firstname,
+            auth.lastname,
+            auth.birthNumber,
+            auth.address,
+            auth.isAdmin,
+            auth.isBanned,
+            auth.isReviewed,
+            userIdBorrows.firstOrNull { userIdBorrowCount -> userIdBorrowCount.id == auth.id.toString() }?.count ?: 0
+        )
     }
 
     override fun getPendingUsers(): List<UserResponseBean> {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-pendings',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PendingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _http: HttpClient) { }
 
   ngOnInit(): void {
+    this.fetch()
   }
 
   fetch() {
@@ -21,9 +23,7 @@ export class PendingsComponent implements OnInit {
           console.log(response)
         },
         error: (error: any) => {
-          if (error.status === 401) {
 
-          }
         },
       });
   }

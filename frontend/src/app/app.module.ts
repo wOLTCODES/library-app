@@ -13,9 +13,11 @@ import { UserBooksComponent } from './components/main-page/user-books/user-books
 import { UserHistoryComponent } from './components/main-page/user-history/user-history.component';
 import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { CatalogItemComponent } from './components/main-page/catalog/catalog-item/catalog-item.component';
+import {GlobalHttpInterceptorServiceInterceptor} from "./interceptors/global-http-interceptor-service.interceptor";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,10 @@ import { CatalogItemComponent } from './components/main-page/catalog/catalog-ite
     RegisterComponent,
     CatalogItemComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorServiceInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

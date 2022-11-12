@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-users',
@@ -6,9 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetch()
+  }
 
   fetch() {
     //fetch all books
@@ -19,9 +22,7 @@ export class UsersComponent implements OnInit {
           console.log(response)
         },
         error: (error: any) => {
-          if (error.status === 401) {
 
-          }
         },
       });
   }

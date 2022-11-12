@@ -147,25 +147,7 @@ export class CatalogComponent implements OnInit {
           console.log(response)
         },
         error: (error: any) => {
-          if (error.status === 401) {
 
-          }
-        },
-      });
-  }
-
-  borrow() {
-    //borrow a book
-    this._http
-      .get('/knihovna/api/book/borrow/<book_id>', {observe: 'response'})
-      .subscribe({
-        next: (response) => {
-          console.log(response)
-        },
-        error: (error: any) => {
-          if (error.status === 401) {
-
-          }
         },
       });
   }

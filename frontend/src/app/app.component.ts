@@ -10,4 +10,8 @@ export class AppComponent {
   title = 'library';
 
   constructor(public router: Router) {}
+
+  public static throwExpression(message?: string) {
+    throw new Error(message)
+  }
 }
