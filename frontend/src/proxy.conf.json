@@ -1,6 +1,6 @@
 {
   "/knihovna/api": {
-    "target": "https://woltcodes.com",
+    "target": "http://localhost:8090",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

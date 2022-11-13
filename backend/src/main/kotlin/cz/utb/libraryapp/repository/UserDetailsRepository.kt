@@ -1,7 +1,9 @@
 package cz.utb.libraryapp.repository
 
+import cz.utb.libraryapp.model.entity.Book
 import cz.utb.libraryapp.model.entity.CustomUserDetails
 import org.bson.types.ObjectId
+import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 import org.springframework.data.mongodb.repository.Update
@@ -20,4 +22,7 @@ interface UserDetailsRepository: MongoRepository<CustomUserDetails, String> {
 
     @Update("{ '\$set': { 'isAdmin': ?1 }}")
     fun findAndSetIsAdminById(id: ObjectId, isAdmin: Boolean)
+
+    @Query(value = "?0")
+    fun searchAllAndSort(searchQuery: String, sort: Sort): List<CustomUserDetails>
 }

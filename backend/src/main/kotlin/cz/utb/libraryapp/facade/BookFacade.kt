@@ -1,15 +1,19 @@
 package cz.utb.libraryapp.facade
 
+import com.google.common.base.CaseFormat
 import cz.utb.libraryapp.model.entity.Book
 import cz.utb.libraryapp.model.entity.BorrowHistory
 import cz.utb.libraryapp.model.entity.BorrowedCurrently
 import cz.utb.libraryapp.model.entity.CustomUserDetails
 import cz.utb.libraryapp.model.request.BookRequestBean
+import cz.utb.libraryapp.model.request.BookSearchParams
+import cz.utb.libraryapp.model.request.OrderByType
 import cz.utb.libraryapp.model.response.BookResponseBean
 import cz.utb.libraryapp.repository.BookRepository
 import cz.utb.libraryapp.repository.BorrowHistoryRepository
 import cz.utb.libraryapp.repository.BorrowedCurrentlyRepository
 import org.bson.types.ObjectId
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
@@ -17,7 +21,7 @@ import org.springframework.web.server.ResponseStatusException
 
 
 interface BookFacade {
-    fun getAllBooks(): List<BookResponseBean>
+    fun getAllBooks(searchParams: BookSearchParams): List<BookResponseBean>
     fun getBorrowedBooks(): List<BookResponseBean>
     fun insertBook(book: BookRequestBean): ObjectId
     fun editBook(bookId: ObjectId, book: BookRequestBean)
@@ -28,8 +32,48 @@ interface BookFacade {
 
 @Service
 class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRepository: BorrowedCurrentlyRepository, val borrowHistoryRepository: BorrowHistoryRepository): BookFacade {
-    override fun getAllBooks(): List<BookResponseBean> {
-        val books = bookRepository.findAll()
+
+    private fun getSearchQueryString(searchParams: BookSearchParams): String {
+        val bookSearchQuery = StringBuilder()
+        bookSearchQuery.append("{")
+        if (searchParams.filterType != null) {
+            if (searchParams.bookName != null || searchParams.authorName != null || searchParams.publishedYear != null) {
+                bookSearchQuery.append("\$${searchParams.filterType.name.lowercase()}:[")
+
+                if (!searchParams.bookName.isNullOrBlank()) {
+                    bookSearchQuery.append("{name:/.*${searchParams.bookName}.*/},")
+                }
+
+                if (!searchParams.authorName.isNullOrBlank()) {
+                    bookSearchQuery.append("{author:/.*${searchParams.authorName}.*/},")
+                }
+
+                if (searchParams.publishedYear != null) {
+                    bookSearchQuery.append("{publishedYear:/.*${searchParams.publishedYear}.*/},")
+                }
+
+                bookSearchQuery.append("]")
+            }
+        }
+        bookSearchQuery.append("}")
+        return bookSearchQuery.toString()
+    }
+
+    private fun getSort(searchParams: BookSearchParams): Sort {
+        if (searchParams.orderBy != null && searchParams.orderByType != null) {
+            return Sort.unsorted()
+        }
+
+        return Sort.by(
+            if (searchParams.orderByType == OrderByType.ASC) {Sort.Direction.ASC} else {Sort.Direction.DESC},
+            CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, searchParams.orderBy!!.name)
+        )
+    }
+
+    override fun getAllBooks(searchParams: BookSearchParams): List<BookResponseBean> {
+        val searchQuery = getSearchQueryString(searchParams)
+        val sortQuery = getSort(searchParams)
+        val books = bookRepository.searchAllAndSort(searchQuery, sortQuery)
         val group = borrowedCurrentlyRepository.groupByBookId(books.map { it.id.toString() })
         return books.map { BookResponseBean(
             it.id,

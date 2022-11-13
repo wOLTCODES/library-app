@@ -3,6 +3,7 @@ package cz.utb.libraryapp.controller
 import cz.utb.libraryapp.facade.BookFacade
 import cz.utb.libraryapp.model.entity.Book
 import cz.utb.libraryapp.model.request.BookRequestBean
+import cz.utb.libraryapp.model.request.BookSearchParams
 import cz.utb.libraryapp.model.response.BookResponseBean
 import org.bson.types.ObjectId
 import org.springframework.http.HttpStatus
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/book")
 class BookController(val bookFacade: BookFacade) {
     @GetMapping
-    fun getAllBooks(): ResponseEntity<List<BookResponseBean>> {
-        val books = bookFacade.getAllBooks()
+    fun getAllBooks(searchParams: BookSearchParams): ResponseEntity<List<BookResponseBean>> {
+        val books = bookFacade.getAllBooks(searchParams)
         return ResponseEntity(books, HttpStatus.OK)
     }
 

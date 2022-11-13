@@ -2,8 +2,10 @@ package cz.utb.libraryapp.controller
 
 import cz.utb.libraryapp.facade.UserFacade
 import cz.utb.libraryapp.model.entity.CustomUserDetails
+import cz.utb.libraryapp.model.request.BookSearchParams
 import cz.utb.libraryapp.model.request.EditUserRequestBean
 import cz.utb.libraryapp.model.request.RegisterRequestBean
+import cz.utb.libraryapp.model.request.UserSearchParams
 import cz.utb.libraryapp.model.response.NumberOfPendingUsersResponseBean
 import cz.utb.libraryapp.model.response.UserResponseBean
 import cz.utb.libraryapp.repository.UserDetailsRepository
@@ -40,8 +42,8 @@ class UserController(val userFacade: UserFacade) {
     }
 
     @GetMapping
-    fun getAllUsers(): ResponseEntity<List<UserResponseBean>> {
-        val users = userFacade.getAllUsers()
+    fun getAllUsers(searchParams: UserSearchParams): ResponseEntity<List<UserResponseBean>> {
+        val users = userFacade.getAllUsers(searchParams)
         return ResponseEntity(users, HttpStatus.OK)
     }
 

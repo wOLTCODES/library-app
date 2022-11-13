@@ -1,13 +1,18 @@
 package cz.utb.libraryapp.facade
 
+import com.google.common.base.CaseFormat
 import cz.utb.libraryapp.model.RoleEnum
 import cz.utb.libraryapp.model.entity.CustomUserDetails
+import cz.utb.libraryapp.model.request.BookSearchParams
 import cz.utb.libraryapp.model.request.EditUserRequestBean
+import cz.utb.libraryapp.model.request.OrderByType
 import cz.utb.libraryapp.model.request.RegisterRequestBean
+import cz.utb.libraryapp.model.request.UserSearchParams
 import cz.utb.libraryapp.model.response.UserResponseBean
 import cz.utb.libraryapp.repository.BorrowedCurrentlyRepository
 import cz.utb.libraryapp.repository.UserDetailsRepository
 import org.bson.types.ObjectId
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
@@ -16,7 +21,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 interface UserFacade {
-    fun getAllUsers(): List<UserResponseBean>
+    fun getAllUsers(searchParams: UserSearchParams): List<UserResponseBean>
     fun getCurrentUserInfo(): UserResponseBean
     fun getPendingUsers(): List<UserResponseBean>
     fun registerUser(registerRequest: RegisterRequestBean): ObjectId
@@ -34,8 +39,54 @@ class UserFacadeImpl(
     val currentlyRepository: BorrowedCurrentlyRepository,
     val bCryptPasswordEncoder: BCryptPasswordEncoder
 ): UserFacade {
-    override fun getAllUsers(): List<UserResponseBean> {
-        val usersFromDb = userDetailsRepository.findAll()
+
+    private fun getSearchQueryString(searchParams: UserSearchParams): String {
+        val userSearchQuery = StringBuilder()
+        userSearchQuery.append("{")
+        if (searchParams.filterType != null) {
+            if (searchParams.firstname != null || searchParams.lastname != null || searchParams.address != null || searchParams.birthNumber != null) {
+                userSearchQuery.append("\$${searchParams.filterType.name.lowercase()}:[")
+
+                if (!searchParams.firstname.isNullOrBlank()) {
+                    userSearchQuery.append("{firstname:/.*${searchParams.firstname}.*/},")
+                }
+
+                if (!searchParams.lastname.isNullOrBlank()) {
+                    userSearchQuery.append("{lastname:/.*${searchParams.lastname}.*/},")
+                }
+
+                if (searchParams.address != null) {
+                    userSearchQuery.append("{address:/.*${searchParams.address}.*/},")
+                }
+
+                if (searchParams.birthNumber != null) {
+                    userSearchQuery.append("{birthNumber:/.*${searchParams.birthNumber}.*/},")
+                }
+
+                userSearchQuery.append("]")
+            }
+        }
+        userSearchQuery.append("}")
+        return userSearchQuery.toString()
+    }
+
+    private fun getSort(searchParams: UserSearchParams): Sort {
+        if (searchParams.orderBy != null && searchParams.orderByType != null) {
+            return Sort.unsorted()
+        }
+
+        return Sort.by(
+            if (searchParams.orderByType == OrderByType.ASC) {
+                Sort.Direction.ASC} else {
+                Sort.Direction.DESC},
+            CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, searchParams.orderBy!!.name)
+        )
+    }
+
+    override fun getAllUsers(searchParams: UserSearchParams): List<UserResponseBean> {
+        val searchQuery = getSearchQueryString(searchParams)
+        val sortQuery = getSort(searchParams)
+        val usersFromDb = userDetailsRepository.searchAllAndSort(searchQuery, sortQuery)
         val userIdBorrows = currentlyRepository.groupByUserId(usersFromDb.map { it.id.toString() })
         return usersFromDb.map {
             UserResponseBean(
