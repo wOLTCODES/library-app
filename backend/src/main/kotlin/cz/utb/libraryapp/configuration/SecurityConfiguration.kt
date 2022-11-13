@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.web.cors.CorsConfiguration
 
 
 @Configuration
@@ -89,6 +90,9 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
                 response.outputStream.write(mapper.writeValueAsString(ErrorResponse("You are not logged in")).toByteArray())
                 response.outputStream.flush()
             }
+            .and()
+            .cors()
+            .configurationSource { CorsConfiguration().applyPermitDefaultValues() }
             .and()
             .csrf().disable()
 
