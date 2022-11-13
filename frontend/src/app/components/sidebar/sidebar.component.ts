@@ -43,7 +43,9 @@ export class SidebarComponent implements OnInit {
 
   initInterval() {
     setInterval(() => {
-      this.fetchNumberOfPendings();
+      if (this.userService.getUser()) {
+        this.fetchNumberOfPendings();
+      }
     }, 5000);
   }
 

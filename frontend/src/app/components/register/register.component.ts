@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -9,31 +9,36 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class RegisterComponent implements OnInit {
   private _registerData: {};
 
-  @ViewChild('username') username: string;
-  @ViewChild('password') password: string;
-  @ViewChild('repeatedPassword') repeatedPassword: string;
-  @ViewChild('firstname') firstname: string;
-  @ViewChild('lastname') lastname: string;
-  @ViewChild('birthNumber') birthNumber: number;
-  @ViewChild('address') address: string;
+  @ViewChild('username') username: ElementRef;
+  @ViewChild('password') password: ElementRef;
+  @ViewChild('repeatedPassword') repeatedPassword: ElementRef;
+  @ViewChild('firstname') firstname: ElementRef;
+  @ViewChild('lastname') lastname: ElementRef;
+  @ViewChild('birthNumber') birthNumber: ElementRef;
+  @ViewChild('address') address: ElementRef;
 
   constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {}
 
   public submitRegister(): void {
+    console.log(this.username.nativeElement.value);
+
     this._registerData = {
-      username: this.username,
-      password: this.password,
-      repeatedPassword: this.repeatedPassword,
-      firstname: this.firstname,
-      lastname: this.lastname,
-      birthNumber: this.birthNumber,
-      address: this.address,
+      username: this.username.nativeElement.value,
+      password: this.password.nativeElement.value,
+      repeatedPassword: this.repeatedPassword.nativeElement.value,
+      firstname: this.firstname.nativeElement.value,
+      lastname: this.lastname.nativeElement.value,
+      birthNumber: this.birthNumber.nativeElement.value,
+      address: this.address.nativeElement.value,
     };
+    console.log(this._registerData);
 
     this._http
-      .post('https://woltcodes.com/api/user/register', this._registerData)
+      .post('https://woltcodes.com/api/user/register', this._registerData, {
+        observe: 'response',
+      })
       .subscribe({
         next: (response) => console.log(response),
         error: (error: HttpErrorResponse) => console.log(error),
