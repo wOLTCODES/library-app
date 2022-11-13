@@ -1,7 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {faArrowRightFromBracket, faBackward, faBookBookmark, faBookmark, faPencil, faStepBackward, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {HttpClient} from "@angular/common/http";
-import {Book} from "../../../../model/Book";
+import {
+  faArrowRightFromBracket,
+  faBackward,
+  faBookBookmark,
+  faBookmark,
+  faPencil,
+  faStepBackward,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
+import { HttpClient } from '@angular/common/http';
+import { Book } from '../../../../model/Book';
+import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-catalog-item',
@@ -11,41 +20,35 @@ import {Book} from "../../../../model/Book";
 export class CatalogItemComponent implements OnInit {
   @Input() book: Book;
 
-  faBorrow = faBookBookmark
-  faTrash = faTrash
-  faPencil = faPencil
+  faBorrow = faBookBookmark;
+  faTrash = faTrash;
+  faPencil = faPencil;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, public userS: UserServiceService) {}
 
   ngOnInit(): void {}
 
   borrow(bookId: string) {
     this._http
-      .get(`/knihovna/api/book/borrow/${bookId}`, {observe: 'response'})
+      .post(`/knihovna/api/book/borrow/${bookId}`, { observe: 'response' })
       .subscribe({
         next: (response) => {
-          console.log(response)
+          console.log(response);
         },
-        error: (error: any) => {
-
-        },
+        error: (error: any) => {},
       });
   }
 
-  edit(bookId: string) {
-
-  }
+  edit(bookId: string) {}
 
   delete(bookId: string) {
     this._http
-      .delete(`/knihovna/api/book/delete/${bookId}`, {observe: 'response'})
+      .delete(`/knihovna/api/book/delete/${bookId}`, { observe: 'response' })
       .subscribe({
         next: (response) => {
-          console.log(response)
+          console.log(response);
         },
-        error: (error: any) => {
-
-        },
+        error: (error: any) => {},
       });
   }
 }
