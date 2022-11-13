@@ -151,6 +151,12 @@ class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRe
             throw ResponseStatusException(HttpStatus.CONFLICT, "You have borrowed this book already")
         }
 
+        val userIdBorrows = borrowedCurrentlyRepository.groupByUserId(listOf(auth.id.toString()))
+        val numberOfBorrows = userIdBorrows.firstOrNull { userIdBorrowCount -> userIdBorrowCount.id == auth.id.toString() }?.count ?: 0
+        if (numberOfBorrows >= 6) {
+            throw ResponseStatusException(HttpStatus.CONFLICT, "You have maximum number(6) of books you can borrow")
+        }
+
         borrowHistoryRepository.insert(BorrowHistory(
             auth.id.toString(),
             bookId.toString()
