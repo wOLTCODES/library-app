@@ -65,7 +65,7 @@ class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRe
         }
 
         return Sort.by(
-            if (searchParams.orderByType == OrderByType.ASC) {Sort.Direction.ASC} else {Sort.Direction.DESC},
+            if (searchParams.orderByType == OrderByType.ASC) { Sort.Direction.ASC } else { Sort.Direction.DESC },
             CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, searchParams.orderBy!!.name)
         )
     }
