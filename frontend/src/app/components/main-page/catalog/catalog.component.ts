@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Book} from "../../../model/Book";
+import { HttpClient } from '@angular/common/http';
+import { Book } from '../../../model/Book';
 
 @Component({
   selector: 'app-catalog',
@@ -10,29 +10,30 @@ import {Book} from "../../../model/Book";
 export class CatalogComponent implements OnInit {
   @Input() title = '';
 
-  public books: Book[]
+  public books: Book[];
 
   constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {
-    this.fetch()
+    this.fetch();
   }
 
   fetch() {
     //fetch all books
+    console.log('loading');
+
     this._http
-      .get<Book[]>('/knihovna/api/book', {observe: 'response'})
+      .get<Book[]>('/knihovna/api/book', { observe: 'response' })
       .subscribe({
         next: (response) => {
-          let books = response.body
+          let books = response.body;
           if (books == null) {
-            throw new Error('No body')
+            throw new Error('No body');
           }
-          this.books = books
+          this.books = books;
+          console.log('ready');
         },
-        error: (error: any) => {
-
-        },
+        error: (error: any) => {},
       });
   }
 }

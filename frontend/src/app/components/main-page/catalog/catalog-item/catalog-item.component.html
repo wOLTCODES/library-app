@@ -18,7 +18,11 @@
   </div>
   <div class="table__cell" role="cell">
     <span>
-      <fa-icon [icon]="faBorrow" (click)="this.borrow(book.id)"></fa-icon>
+      <fa-icon
+        [icon]="faBorrow"
+        (click)="this.borrow(book.id)"
+        *ngIf="!userS.getUser().isAdmin"
+      ></fa-icon>
       <fa-icon
         [icon]="faPencil"
         (click)="this.edit(book.id)"
