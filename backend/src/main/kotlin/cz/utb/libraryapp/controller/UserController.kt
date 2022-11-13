@@ -7,6 +7,7 @@ import cz.utb.libraryapp.model.request.EditUserRequestBean
 import cz.utb.libraryapp.model.request.RegisterRequestBean
 import cz.utb.libraryapp.model.request.UserSearchParams
 import cz.utb.libraryapp.model.response.NumberOfPendingUsersResponseBean
+import cz.utb.libraryapp.model.response.ObjectIdResponse
 import cz.utb.libraryapp.model.response.UserResponseBean
 import cz.utb.libraryapp.repository.UserDetailsRepository
 import javax.servlet.http.HttpServletResponse
@@ -66,9 +67,9 @@ class UserController(val userFacade: UserFacade) {
     }
 
     @PostMapping("/register")
-    fun registerUser(@RequestBody registerRequest: RegisterRequestBean): ResponseEntity<String> {
+    fun registerUser(@RequestBody registerRequest: RegisterRequestBean): ResponseEntity<ObjectIdResponse> {
         val insertedId = userFacade.registerUser(registerRequest)
-        return ResponseEntity(insertedId.toString(), HttpStatus.OK)
+        return ResponseEntity(ObjectIdResponse(insertedId), HttpStatus.OK)
     }
 
     @PostMapping("/edit/{userId}")

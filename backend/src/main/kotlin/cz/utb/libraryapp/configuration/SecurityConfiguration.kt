@@ -91,9 +91,9 @@ class SecurityConfiguration(val bCryptPasswordEncoder: BCryptPasswordEncoder, va
                 response.outputStream.flush()
             }
             .and()
-            .cors()
-            .configurationSource { CorsConfiguration().applyPermitDefaultValues() }
-            .and()
+//            .cors()
+//            .configurationSource { CorsConfiguration().applyPermitDefaultValues() }
+//            .and()
             .csrf().disable()
 
         return http.build()
