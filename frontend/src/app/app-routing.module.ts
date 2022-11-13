@@ -8,6 +8,7 @@ import { UserHistoryComponent } from './components/main-page/user-history/user-h
 import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
 import { UsersComponent } from './components/main-page/users/users.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NewBookComponent } from './components/search-catalog/new-book/new-book.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'catalog', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '**', component: CatalogComponent}
+  { path: 'new-book', component: NewBookComponent },
+  { path: '**', component: CatalogComponent },
 ];
 
 @NgModule({

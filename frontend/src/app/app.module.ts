@@ -22,6 +22,7 @@ import { PendingsItemComponent } from './components/main-page/pendings/pendings-
 import { UserBooksItemComponent } from './components/main-page/user-books/user-books-item/user-books-item/user-books-item.component';
 import { UserHistoryItemComponent } from './components/main-page/user-history/user-history-item/user-history-item/user-history-item.component';
 import { UsersItemComponent } from './components/main-page/users/users-item/users-item/users-item.component';
+import { NewBookComponent } from './components/search-catalog/new-book/new-book.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UsersItemComponent } from './components/main-page/users/users-item/user
     UserBooksItemComponent,
     UserHistoryItemComponent,
     UsersItemComponent,
+    NewBookComponent,
   ],
   imports: [
     BrowserModule,
