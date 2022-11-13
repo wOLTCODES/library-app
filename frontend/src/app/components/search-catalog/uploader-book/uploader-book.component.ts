@@ -1,12 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { LoginComponent } from '../../login/login.component';
 
 @Component({
-  selector: 'app-new-book',
-  templateUrl: './new-book.component.html',
-  styleUrls: ['./new-book.component.scss'],
+  selector: 'app-uploader-book',
+  templateUrl: './uploader-book.component.html',
+  styleUrls: ['./uploader-book.component.scss'],
 })
-export class NewBookComponent implements OnInit {
+export class UploaderBookComponent implements OnInit {
   @ViewChild('imageInput') imageInput: ElementRef;
   @ViewChild('name') name: ElementRef;
   @ViewChild('author') author: ElementRef;
@@ -48,13 +49,12 @@ export class NewBookComponent implements OnInit {
       copies: this.copies.nativeElement.value,
     };
 
+    console.log(this._bookData);
+
     this._http
-      .post('https://woltcodes.com/knihovna/api/book/insert', this._bookData, {
+      .post('/knihovna/api/book/insert', this._bookData, {
         observe: 'response',
       })
-      .subscribe({
-        next: (response) => console.log(response),
-        error: (error: HttpErrorResponse) => console.log(error),
-      });
+      .subscribe(() => {});
   }
 }
