@@ -11,6 +11,7 @@ export class UserHistoryItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log({bookName: this.borrow.bookName, bookId: this.borrow.bookId})
   }
 
 }
