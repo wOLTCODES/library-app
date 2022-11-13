@@ -1,1 +1,27 @@
-<p>new-book works!</p>
+<div class="new-book">
+  <label for="image">Select image</label>
+  <input
+    id="image"
+    #imageInput
+    type="file"
+    accept="image/*"
+    (change)="processImage($event)"
+  />
+  <br />
+  <label for="name" class="new-book__name">Name</label>
+  <input id="name" #name />
+  <br />
+  <label for="author">Author</label>
+  <input id="author" #author />
+  <br />
+  <label for="pageNumber">Number of pages</label>
+  <input id="pageNumber" #pageNumber />
+  <br />
+  <label for="publishedYear">Year of publish</label>
+  <input id="publishedYear" #publishedYear />
+  <br />
+  <label for="copies">Copies count</label>
+  <input id="copies" #copies />
+  <br />
+  <button (click)="submitBook()">Add book</button>
+</div>
