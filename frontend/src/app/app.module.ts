@@ -7,16 +7,16 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CatalogComponent } from './components/main-page/catalog/catalog.component';
 import { UsersComponent } from './components/main-page/users/users.component';
 import { SidebarItemComponent } from './components/sidebar/sidebar-item/sidebar-item.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchCatalogComponent } from './components/search-catalog/search-catalog.component';
 import { PendingsComponent } from './components/main-page/pendings/pendings.component';
 import { UserBooksComponent } from './components/main-page/user-books/user-books.component';
 import { UserHistoryComponent } from './components/main-page/user-history/user-history.component';
 import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
 import { LoginComponent } from './components/login/login.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { CatalogItemComponent } from './components/main-page/catalog/catalog-item/catalog-item.component';
-import {GlobalHttpInterceptorServiceInterceptor} from "./interceptors/global-http-interceptor-service.interceptor";
+import { GlobalHttpInterceptorServiceInterceptor } from './interceptors/global-http-interceptor-service.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PendingsItemComponent } from './components/main-page/pendings/pendings-item/pendings-item/pendings-item.component';
 import { UserBooksItemComponent } from './components/main-page/user-books/user-books-item/user-books-item/user-books-item.component';
@@ -30,7 +30,7 @@ import { UsersItemComponent } from './components/main-page/users/users-item/user
     CatalogComponent,
     UsersComponent,
     SidebarItemComponent,
-    SearchBarComponent,
+    SearchCatalogComponent,
     PendingsComponent,
     UserBooksComponent,
     UserHistoryComponent,
@@ -43,9 +43,18 @@ import { UsersItemComponent } from './components/main-page/users/users-item/user
     UserHistoryItemComponent,
     UsersItemComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FontAwesomeModule,
+  ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorServiceInterceptor, multi: true }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalHttpInterceptorServiceInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

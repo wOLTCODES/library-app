@@ -11,6 +11,8 @@
   "
 >
   <app-sidebar></app-sidebar>
-  <app-search-bar></app-search-bar>
+  <app-search-catalog
+    *ngIf="router.url.includes('catalog')"
+  ></app-search-catalog>
   <router-outlet></router-outlet>
 </div>
