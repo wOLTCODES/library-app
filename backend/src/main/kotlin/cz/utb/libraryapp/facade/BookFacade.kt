@@ -60,7 +60,7 @@ class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRe
     }
 
     private fun getSort(searchParams: BookSearchParams): Sort {
-        if (searchParams.orderBy != null && searchParams.orderByType != null) {
+        if (searchParams.orderBy == null && searchParams.orderByType == null) {
             return Sort.unsorted()
         }
 

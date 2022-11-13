@@ -71,7 +71,7 @@ class UserFacadeImpl(
     }
 
     private fun getSort(searchParams: UserSearchParams): Sort {
-        if (searchParams.orderBy != null && searchParams.orderByType != null) {
+        if (searchParams.orderBy == null && searchParams.orderByType == null) {
             return Sort.unsorted()
         }
 

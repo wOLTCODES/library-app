@@ -6,6 +6,6 @@ data class UserSearchParams (
     val lastname: String?,
     val address: String?,
     val birthNumber: Int?,
-    val orderBy: OrderByBook?,
+    val orderBy: OrderByUser?,
     val orderByType: OrderByType?
 )
