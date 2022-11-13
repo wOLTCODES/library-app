@@ -1,7 +1,7 @@
 {
   "/knihovna/api": {
     "target": "https://woltcodes.com",
-    "secure": false,
+    "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
   }
