@@ -1,6 +1,7 @@
 .search-bar {
   margin-left: 270px;
-  margin-right: 50px;
+  display: flex;
+  width: calc(100% - 320px);
 
   &__input {
     margin-top: 85px;
@@ -9,13 +10,45 @@
     border-right: 0;
     border-color: gainsboro;
     width: 20%;
-    padding: 10px;
-    font-size: 1em;
     padding-left: 30px;
-    margin-left: 10px;
+    margin-left: 0;
+    margin-right: 10px;
+    height: 35px;
+    border-radius: 5px;
 
     &:focus {
       outline: none;
+    }
+  }
+
+  &__icon-add {
+    height: 30px;
+    width: 30px;
+    margin-top: 90px;
+    cursor: pointer;
+    position: absolute;
+    right: 50px;
+  }
+
+  &__button {
+    height: 35px;
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+    background-color: gainsboro;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: 85px;
+    font-size: 0.8em;
+
+    &:hover {
+      border: #229416 1px solid;
+      color: white;
+      background-color: #229416;
+    }
+
+    &-left {
+      align-items: end;
     }
   }
 
@@ -25,6 +58,7 @@
     height: 20px;
     width: 20px;
     opacity: 0.8;
+    margin-left: 15px;
   }
 
   &__toggle {
@@ -32,6 +66,7 @@
     display: inline-block;
     width: 30px;
     height: 17px;
+    margin-top: 90px;
   }
 
   &__toggle input {
