@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../../model/Book';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
@@ -9,6 +10,8 @@ import { Book } from '../../../model/Book';
 })
 export class CatalogComponent implements OnInit {
   @Input() title = '';
+
+  public isLoaded = new BehaviorSubject<boolean>(false);
 
   public books: Book[];
 
@@ -20,7 +23,8 @@ export class CatalogComponent implements OnInit {
 
   fetch() {
     //fetch all books
-    console.log('loading');
+
+    this.isLoaded.next(false);
 
     this._http
       .get<Book[]>('/knihovna/api/book', { observe: 'response' })
@@ -31,7 +35,7 @@ export class CatalogComponent implements OnInit {
             throw new Error('No body');
           }
           this.books = books;
-          console.log('ready');
+          this.isLoaded.next(true);
         },
         error: (error: any) => {},
       });

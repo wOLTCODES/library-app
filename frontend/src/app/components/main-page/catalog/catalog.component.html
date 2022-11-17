@@ -7,9 +7,22 @@
     <div class="table__cell" role="columnheader">Year of publication</div>
     <div class="table__cell" role="columnheader">Actions</div>
   </div>
-  <div class="table__body">
+  <div class="table__body" *ngIf="isLoaded.value">
     <div class="table__list">
-      <app-catalog-item *ngFor="let book of books" [book]="book"></app-catalog-item>
+      <app-catalog-item
+        *ngFor="let book of books"
+        [book]="book"
+      ></app-catalog-item>
+    </div>
+  </div>
+  <div class="table__body" *ngIf="!isLoaded.value">
+    <div class="table__list">
+      <div class="table__loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   </div>
 </div>
