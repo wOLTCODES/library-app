@@ -1,4 +1,4 @@
-<div class="table" role="table">
+<div class="table" role="table" *ngIf="isLoaded.value">
   <div class="table__head" role="rowgroup">
     <div class="table__cell" role="columnheader">Username</div>
     <div class="table__cell" role="columnheader">Firstname</div>
@@ -16,3 +16,15 @@
   </div>
 </div>
 
+<div class="table">
+  <div class="table__body" *ngIf="!isLoaded.value">
+    <div class="table__list">
+      <div class="table__loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
