@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   }
 
   public get getTitle() {
-    return this.userService.getUser().isAdmin
+    return this.userService.getUser()?.isAdmin
       ? 'All users history'
       : 'My history';
   }
