@@ -1,5 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'src/app/services/message.service';
 import { LoginComponent } from '../../login/login.component';
 
 @Component({
@@ -19,7 +27,11 @@ export class UploaderBookComponent implements OnInit {
   private _file: File;
   private _bookData: {};
 
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _router: Router,
+    private _messageS: MessageService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -55,6 +67,20 @@ export class UploaderBookComponent implements OnInit {
       .post('/knihovna/api/book/insert', this._bookData, {
         observe: 'response',
       })
-      .subscribe(() => {});
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this._router.navigate(['/', 'catalog']);
+        },
+        error: (error: any) => {
+          console.log(error.status);
+          if (error.status === 400) {
+            this._messageS.generateMessage(
+              'Please fill all inputs',
+              'error-message'
+            );
+          }
+        },
+      });
   }
 }

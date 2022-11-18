@@ -1,27 +1,40 @@
 <div class="new-book">
+  <h1>Book uploader</h1>
   <label for="image">Select image</label>
+  <br />
   <input
     id="image"
     #imageInput
     type="file"
     accept="image/*"
     (change)="processImage($event)"
+    class="new-book__input"
   />
   <br />
   <label for="name" class="new-book__name">Name</label>
-  <input id="name" #name />
+  <br />
+  <input id="name" #name class="new-book__input" type="text" />
   <br />
   <label for="author">Author</label>
-  <input id="author" #author />
+  <br />
+  <input id="author" #author class="new-book__input" type="text" />
   <br />
   <label for="pageNumber">Number of pages</label>
-  <input id="pageNumber" #pageNumber />
+  <br />
+  <input id="pageNumber" #pageNumber class="new-book__input" type="number" />
   <br />
   <label for="publishedYear">Year of publish</label>
-  <input id="publishedYear" #publishedYear />
+  <br />
+  <input
+    id="publishedYear"
+    #publishedYear
+    class="new-book__input"
+    type="number"
+  />
   <br />
   <label for="copies">Copies count</label>
-  <input id="copies" #copies />
   <br />
-  <button (click)="submitBook()" class="">Add book</button>
+  <input id="copies" #copies class="new-book__input" type="number" />
+  <br />
+  <button (click)="submitBook()" class="new-book__button">Add book</button>
 </div>
