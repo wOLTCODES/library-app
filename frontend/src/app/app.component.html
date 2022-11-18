@@ -15,5 +15,7 @@
   <app-search-catalog
     *ngIf="router.url.includes('catalog')"
   ></app-search-catalog>
+  <app-search-user *ngIf="router.url.includes('user')"></app-search-user>
+
   <router-outlet></router-outlet>
 </div>
