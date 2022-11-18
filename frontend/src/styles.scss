@@ -12,3 +12,40 @@ html {
 body {
   background-color: #f1f1f1;
 }
+
+.error-message {
+  width: 100vw;
+  position: absolute;
+  top: -100px;
+  left: 0;
+
+  padding: 20px 0;
+
+  background-color: red;
+  color: whitesmoke;
+  text-align: center;
+
+  transition: top 200ms ease;
+
+  &.show {
+    top: 0px;
+  }
+}
+.successful-message {
+  width: 100vw;
+  position: absolute;
+  top: -100px;
+  left: 0;
+
+  padding: 20px 0;
+
+  background-color: green;
+  color: whitesmoke;
+  text-align: center;
+
+  transition: top 200ms ease;
+
+  &.show {
+    top: 0px;
+  }
+}
