@@ -170,21 +170,37 @@ class UserFacadeImpl(
     }
 
     override fun editUser(userId: ObjectId, editUserRequest: EditUserRequestBean) {
+        val user = userDetailsRepository.findById(userId.toString())
+        if (user.isEmpty) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist")
+        }
+
+        val userInDb = user.get()
+
+        var passwordToSet = userInDb.password
+        if (!editUserRequest.password.isNullOrEmpty() && !editUserRequest.repeatedPassword.isNullOrEmpty()) {
+            if (editUserRequest.password != editUserRequest.repeatedPassword) {
+                throw ResponseStatusException(HttpStatus.CONFLICT, "Passwords do not match")
+            }
+
+            passwordToSet = bCryptPasswordEncoder.encode(editUserRequest.password)
+        }
+
         userDetailsRepository.save(CustomUserDetails(
             editUserRequest.username,
-            editUserRequest.password,
-            enabled = true,
-            accountNonExpired = true,
-            credentialsNonExpired = true,
-            accountNonLocked = true,
-            authorities = listOf(SimpleGrantedAuthority(RoleEnum.USER.name)),
+            passwordToSet,
+            enabled = userInDb.isEnabled,
+            accountNonExpired = userInDb.isAccountNonExpired,
+            credentialsNonExpired = userInDb.isCredentialsNonExpired,
+            accountNonLocked = userInDb.isAccountNonLocked,
+            authorities = userInDb.authorities,
             editUserRequest.firstname,
             editUserRequest.lastname,
             editUserRequest.birthNumber,
             editUserRequest.address,
-            isAdmin = false,
-            isBanned = false,
-            isReviewed = false,
+            isAdmin = userInDb.isAdmin,
+            isBanned = userInDb.isBanned,
+            isReviewed = userInDb.isBanned,
             userId
         ))
     }
