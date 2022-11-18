@@ -1,0 +1,77 @@
+<div class="book-edit">
+  <h1>Book edit</h1>
+  <div *ngIf="isLoaded.value">
+    <label for="image">Select image</label>
+    <br />
+    <input
+      id="image"
+      #imageInput
+      type="file"
+      accept="image/*"
+      class="book-edit__input"
+      (change)="processImage($event)"
+      value="{{ this.actualBook ? this.actualBook[0]?.coverImg : '' }}"
+    />
+    <br />
+    <label for="name" class="book-edit__name">Name</label>
+    <br />
+    <input
+      id="name"
+      #name
+      class="book-edit__input"
+      type="text"
+      value="{{ this.actualBook ? this.actualBook[0]?.name : '' }}"
+    />
+    <br />
+    <label for="author">Author</label>
+    <br />
+    <input
+      id="author"
+      #author
+      class="book-edit__input"
+      type="text"
+      value="{{ this.actualBook ? this.actualBook[0]?.author : '' }}"
+    />
+    <br />
+    <label for="pageNumber">Number of pages</label>
+    <br />
+    <input
+      id="pageNumber"
+      #pageNumber
+      class="book-edit__input"
+      type="number"
+      value="{{ this.actualBook ? this.actualBook[0]?.pageNumber : '' }}"
+    />
+    <br />
+    <label for="publishedYear">Year of publish</label>
+    <br />
+    <input
+      id="publishedYear"
+      #publishedYear
+      class="book-edit__input"
+      type="number"
+      value="{{ this.actualBook ? this.actualBook[0]?.publishedYear : '' }}"
+    />
+    <br />
+    <label for="copies">Copies count</label>
+    <br />
+    <input
+      id="copies"
+      #copies
+      class="book-edit__input"
+      type="number"
+      value="{{ this.actualBook ? this.actualBook[0]?.copies : '' }}"
+    />
+    <br />
+    <button (click)="submitBook()" class="book-edit__button">
+      Save changes
+    </button>
+  </div>
+
+  <div class="book-edit__loader" *ngIf="!isLoaded.value">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>

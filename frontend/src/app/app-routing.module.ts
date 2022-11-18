@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { BookEditComponent } from './components/main-page/catalog/book-edit/book-edit.component';
 import { CatalogComponent } from './components/main-page/catalog/catalog.component';
 import { PendingsComponent } from './components/main-page/pendings/pendings.component';
 import { UserBooksComponent } from './components/main-page/user-books/user-books.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'uploader-book', component: UploaderBookComponent },
+  { path: 'edit-book', component: BookEditComponent },
   { path: '**', component: CatalogComponent },
 ];
 

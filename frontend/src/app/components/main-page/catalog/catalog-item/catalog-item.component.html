@@ -19,16 +19,12 @@
   <div class="table__cell" role="cell">
     <span>
       <fa-icon
-        [icon]="faBorrow"
-        (click)="this.borrow(book.id)"
-        *ngIf="!userS.getUser().isAdmin"
-      ></fa-icon>
-      <fa-icon
         [icon]="faPencil"
         (click)="this.edit(book.id)"
         *ngIf="userS.getUser().isAdmin"
       ></fa-icon>
       <fa-icon
+        class="faIcon-trash"
         [icon]="faTrash"
         (click)="this.delete(book.id)"
         *ngIf="userS.getUser().isAdmin"

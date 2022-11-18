@@ -1,4 +1,4 @@
-<div class="table" role="table" *ngIf="isLoaded.value">
+<div class="table" role="table" *ngIf="this.bookS.isLoaded.value">
   <div class="table__head" role="rowgroup">
     <div class="table__cell" role="columnheader">Thumbnail</div>
     <div class="table__cell" role="columnheader">Name</div>
@@ -10,7 +10,7 @@
   <div class="table__body">
     <div class="table__list">
       <app-catalog-item
-        *ngFor="let book of books"
+        *ngFor="let book of this.bookS.books"
         [book]="book"
       ></app-catalog-item>
     </div>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="table">
-  <div class="table__body" *ngIf="!isLoaded.value">
+  <div class="table__body" *ngIf="!this.bookS.isLoaded.value">
     <div class="table__list">
       <div class="table__loader">
         <div></div>

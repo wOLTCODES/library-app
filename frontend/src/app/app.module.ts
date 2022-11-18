@@ -24,6 +24,7 @@ import { UserHistoryItemComponent } from './components/main-page/user-history/us
 import { UsersItemComponent } from './components/main-page/users/users-item/users-item/users-item.component';
 import { UploaderBookComponent } from './components/search-catalog/uploader-book/uploader-book.component';
 import { SearchUserComponent } from './components/search-user/search-user.component';
+import { BookEditComponent } from './components/main-page/catalog/book-edit/book-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
     UsersItemComponent,
     UploaderBookComponent,
     SearchUserComponent,
+    BookEditComponent,
   ],
   imports: [
     BrowserModule,

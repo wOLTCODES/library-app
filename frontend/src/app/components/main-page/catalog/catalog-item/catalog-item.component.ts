@@ -11,6 +11,8 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../../../model/Book';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import { BookService } from 'src/app/services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog-item',
@@ -24,7 +26,12 @@ export class CatalogItemComponent implements OnInit {
   faTrash = faTrash;
   faPencil = faPencil;
 
-  constructor(private _http: HttpClient, public userS: UserServiceService) {}
+  constructor(
+    private _http: HttpClient,
+    public userS: UserServiceService,
+    private _bookS: BookService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -39,14 +46,17 @@ export class CatalogItemComponent implements OnInit {
       });
   }
 
-  edit(bookId: string) {}
+  edit(bookId: string) {
+    this._bookS.actualBookId.next(bookId);
+    this._router.navigate(['/', 'edit-book']);
+  }
 
   delete(bookId: string) {
     this._http
       .delete(`/knihovna/api/book/delete/${bookId}`, { observe: 'response' })
       .subscribe({
-        next: (response) => {
-          console.log(response);
+        next: () => {
+          this._bookS.fetch();
         },
         error: (error: any) => {},
       });

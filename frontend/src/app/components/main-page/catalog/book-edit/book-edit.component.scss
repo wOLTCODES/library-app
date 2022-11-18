@@ -1,0 +1,99 @@
+.book-edit {
+  margin-left: 270px;
+  position: absolute;
+  top: 10%;
+
+  &__input {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-color: gainsboro;
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    height: 35px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    background-color: gainsboro;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 0.8em;
+
+    &:hover {
+      border: #229416 1px solid;
+      color: white;
+      background-color: #229416;
+    }
+
+    &-left {
+      align-items: end;
+    }
+  }
+  &__loader {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-left: 45%;
+  }
+  &__loader div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #229416;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  &__loader div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  &__loader div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  &__loader div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  &__loader div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+}
