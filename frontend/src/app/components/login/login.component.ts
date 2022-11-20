@@ -11,7 +11,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/user-service.service';
+import { UserService } from '../../services/user.service';
 import { MessageService } from 'src/app/services/message.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _http: HttpClient,
     private _router: Router,
-    private _userService: UserServiceService,
+    private _userService: UserService,
     private _messageS: MessageService
   ) {}
 

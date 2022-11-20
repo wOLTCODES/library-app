@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../../../model/Book';
-import { UserServiceService } from 'src/app/services/user-service.service';
+import { UserService } from 'src/app/services/user.service';
 import { BookService } from 'src/app/services/book.service';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class CatalogItemComponent implements OnInit {
 
   constructor(
     private _http: HttpClient,
-    public userS: UserServiceService,
+    public userS: UserService,
     private _bookS: BookService,
     private _router: Router
   ) {}

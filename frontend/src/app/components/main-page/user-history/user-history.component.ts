@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BorrowHistory } from '../../../model/BorrowHistory';
-import { UserServiceService } from 'src/app/services/user-service.service';
+import { UserService } from 'src/app/services/user.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class UserHistoryComponent implements OnInit {
   public borrows: BorrowHistory[];
   public isLoaded = new BehaviorSubject<boolean>(false);
 
-  constructor(private _http: HttpClient, private _userS: UserServiceService) {}
+  constructor(private _http: HttpClient, private _userS: UserService) {}
 
   ngOnInit(): void {
     this.fetch();
