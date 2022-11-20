@@ -11,7 +11,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 import { MessageService } from 'src/app/services/message.service';
 
 @Component({

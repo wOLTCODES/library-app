@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { BookEditComponent } from './components/main-page/catalog/book-edit/book-edit.component';
-import { CatalogComponent } from './components/main-page/catalog/catalog.component';
-import { PendingsComponent } from './components/main-page/pendings/pendings.component';
-import { UserBooksComponent } from './components/main-page/user-books/user-books.component';
-import { UserHistoryComponent } from './components/main-page/user-history/user-history.component';
-import { UserProfileComponent } from './components/main-page/user-profile/user-profile.component';
-import { UsersComponent } from './components/main-page/users/users.component';
-import { RegisterComponent } from './components/register/register.component';
-import { UploaderBookComponent } from './components/search-catalog/uploader-book/uploader-book.component';
-import { UploaderUserComponent } from './components/search-user/uploader-user/uploader-user.component';
+import { LoginComponent } from './components/dashboard/login/login.component';
+import { BookEditComponent } from './components/main/catalog/book-edit/book-edit.component';
+import { CatalogComponent } from './components/main/catalog/catalog.component';
+import { PendingsComponent } from './components/main/pendings/pendings.component';
+import { UserBooksComponent } from './components/main/user-books/user-books.component';
+import { HistoryComponent } from './components/main/history/history.component';
+import { ProfileComponent } from './components/main/profile/profile.component';
+import { UsersComponent } from './components/main/users/users.component';
+import { RegisterComponent } from './components/dashboard/register/register.component';
+import { UploaderBookComponent } from './components/main/searchbar-catalog/uploader-book/uploader-book.component';
+import { UploaderUserComponent } from './components/main/searchbar-users/uploader-user/uploader-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'catalog', pathMatch: 'full' },
@@ -18,8 +18,8 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'pendings', component: PendingsComponent },
   { path: 'books', component: UserBooksComponent },
-  { path: 'history', component: UserHistoryComponent },
-  { path: 'profile', component: UserProfileComponent },
+  { path: 'history', component: HistoryComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'uploader-book', component: UploaderBookComponent },

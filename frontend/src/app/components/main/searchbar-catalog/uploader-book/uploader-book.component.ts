@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
-import { LoginComponent } from '../../login/login.component';
+import { LoginComponent } from '../../../dashboard/login/login.component';
 
 @Component({
   selector: 'app-uploader-book',

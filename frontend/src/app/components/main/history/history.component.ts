@@ -5,11 +5,11 @@ import { UserService } from 'src/app/services/user.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-user-history',
-  templateUrl: './user-history.component.html',
-  styleUrls: ['./user-history.component.scss'],
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss'],
 })
-export class UserHistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit {
   public borrows: BorrowHistory[];
   public isLoaded = new BehaviorSubject<boolean>(false);
 
