@@ -12,4 +12,10 @@
 
 fa-icon {
   cursor: pointer;
+  margin-right: 5px;
+
+  color: gray;
+  &:hover {
+    color: black;
+  }
 }

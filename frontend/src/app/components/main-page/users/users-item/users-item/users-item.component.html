@@ -22,10 +22,30 @@
   </div>
   <div class="table__cell" role="cell">
     <span>
-      <fa-icon [icon]="faUp" title="promote"></fa-icon>
-      <fa-icon [icon]="faDown" title="demote"></fa-icon>
-      <fa-icon [icon]="faBan" title="ban"></fa-icon>
-      <fa-icon [icon]="faUnban" title="unban"></fa-icon>
+      <fa-icon
+        [icon]="faUp"
+        title="promote"
+        *ngIf="!user.isAdmin"
+        (click)="promote()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="faDown"
+        title="demote"
+        *ngIf="user.isAdmin"
+        (click)="demote()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="faBan"
+        title="ban"
+        *ngIf="!user.isBanned"
+        (click)="ban()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="faUnban"
+        title="unban"
+        *ngIf="user.isBanned"
+        (click)="unban()"
+      ></fa-icon>
     </span>
   </div>
 </div>
