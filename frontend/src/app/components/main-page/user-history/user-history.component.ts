@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BorrowHistory } from '../../../model/BorrowHistory';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user-history',
@@ -10,6 +11,8 @@ import { UserServiceService } from 'src/app/services/user-service.service';
 })
 export class UserHistoryComponent implements OnInit {
   public borrows: BorrowHistory[];
+  public isLoaded = new BehaviorSubject<boolean>(false);
+
   constructor(private _http: HttpClient, private _userS: UserServiceService) {}
 
   ngOnInit(): void {
@@ -17,6 +20,7 @@ export class UserHistoryComponent implements OnInit {
   }
 
   public fetchHistory() {
+    this.isLoaded.next(false);
     this._http
       .get<BorrowHistory[]>(
         this._userS.getUser().isAdmin
@@ -29,6 +33,7 @@ export class UserHistoryComponent implements OnInit {
           let borrows = response.body;
           if (borrows == null) throw new Error('No body');
           this.borrows = borrows;
+          this.isLoaded.next(true);
         },
         error: (error: any) => {},
       });

@@ -1,4 +1,4 @@
-<div class="table" role="table">
+<div class="table" role="table" *ngIf="isLoaded.value">
   <div class="table__head" role="rowgroup">
     <div class="table__cell" role="columnheader">Username</div>
     <div class="table__cell" role="columnheader">Book Name</div>
@@ -8,8 +8,23 @@
   </div>
   <div class="table__body">
     <div class="table__list">
-      <app-user-history-item *ngFor="let borrow of borrows" [borrow]="borrow"></app-user-history-item>
+      <app-user-history-item
+        *ngFor="let borrow of borrows"
+        [borrow]="borrow"
+      ></app-user-history-item>
+    </div>
+  </div>
+</div>
 
+<div class="table">
+  <div class="table__body" *ngIf="!isLoaded.value">
+    <div class="table__list">
+      <div class="table__loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   </div>
 </div>
