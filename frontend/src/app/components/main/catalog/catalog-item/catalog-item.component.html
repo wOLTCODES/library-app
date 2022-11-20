@@ -24,7 +24,6 @@
         *ngIf="userS.getUser().isAdmin"
       ></fa-icon>
       <fa-icon
-        class="faIcon-trash"
         [icon]="faTrash"
         (click)="this.delete(book.id)"
         *ngIf="userS.getUser().isAdmin"
