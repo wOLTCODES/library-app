@@ -71,7 +71,7 @@ export class UploaderBookComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           if (error.status === 400) {
             this._messageS.generateMessage(
-              'Please fill all inputs',
+              'Please fill all fields',
               'error-message'
             );
           }
