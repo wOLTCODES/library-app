@@ -17,12 +17,9 @@
   ></app-sidebar-item>
   <app-sidebar-item
     *ngIf="userService.getUser() ? userService.getUser().isAdmin : false"
-    title="Pendings"
+    title="{{ pendingsTitle }}"
     routerLink="pendings"
-    ><span *ngIf="userService.getUser() ? userService.getUser().isAdmin : false"
-      >( number of pendings: {{ numberOfPendings }} )</span
-    ></app-sidebar-item
-  >
+  ></app-sidebar-item>
   <app-sidebar-item
     *ngIf="userService.getUser() ? !userService.getUser()?.isAdmin : false"
     title="My books"

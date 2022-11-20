@@ -12,6 +12,7 @@ import { UserServiceService } from '../../services/user-service.service';
 })
 export class SidebarComponent implements OnInit {
   public numberOfPendings: number = 0;
+  public pendingsTitle: string;
 
   constructor(
     private _http: HttpClient,
@@ -36,6 +37,7 @@ export class SidebarComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.numberOfPendings = (response.body as { number: number }).number;
+          this.pendingsTitle = `Pendings (${this.numberOfPendings})`;
         },
         error: (error: any) => {},
       });
