@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserServiceService} from "./services/user-service.service";
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,11 @@ import {UserServiceService} from "./services/user-service.service";
 export class AppComponent {
   title = 'library';
 
-  constructor(public router: Router, private _userService: UserServiceService) {
-    _userService.updateUser()
+  constructor(public router: Router, private _userService: UserService) {
+    _userService.updateUser();
   }
 
   public static throwExpression(message?: string) {
-    throw new Error(message)
+    throw new Error(message);
   }
 }

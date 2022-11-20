@@ -25,6 +25,7 @@ import { UsersItemComponent } from './components/main-page/users/users-item/user
 import { UploaderBookComponent } from './components/search-catalog/uploader-book/uploader-book.component';
 import { SearchUserComponent } from './components/search-user/search-user.component';
 import { BookEditComponent } from './components/main-page/catalog/book-edit/book-edit.component';
+import { UploaderUserComponent } from './components/search-user/uploader-user/uploader-user.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { BookEditComponent } from './components/main-page/catalog/book-edit/book
     UploaderBookComponent,
     SearchUserComponent,
     BookEditComponent,
+    UploaderUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<div class="new-user">
+  <h1>User uploader</h1>
+  <br />
+  <label for="username">Username</label>
+  <br />
+  <input id="username" #username class="new-user__input" type="text" />
+  <br />
+  <label for="password">Password</label>
+  <br />
+  <input id="password" #password class="new-user__input" type="text" />
+  <br />
+  <label for="repeatedPassword">Repeated password</label>
+  <br />
+  <input
+    id="repeatedPassword"
+    #repeatedPassword
+    class="new-user__input"
+    type="text"
+  />
+  <br />
+  <label for="firstName">First name</label>
+  <br />
+  <input id="firstName" #firstName class="new-user__input" type="text" />
+  <br />
+  <label for="lastName">Last name</label>
+  <br />
+  <input id="colastNamepies" #lastName class="new-user__input" type="text" />
+  <br />
+  <label for="birthNumber">Birth number</label>
+  <br />
+  <input id="birthNumber" #birthNumber class="new-user__input" type="number" />
+  <br />
+  <label for="address">Address</label>
+  <br />
+  <input id="address" #address class="new-user__input" type="text" />
+  <br />
+  <button (click)="submitUser()" class="new-user__button">Add user</button>
+</div>

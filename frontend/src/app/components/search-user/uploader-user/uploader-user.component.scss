@@ -1,0 +1,43 @@
+.new-user {
+  margin-left: 270px;
+  position: absolute;
+  top: 10%;
+
+  &__input {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-color: gainsboro;
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    height: 35px;
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+    background-color: gainsboro;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 0.8em;
+
+    &:hover {
+      border: #229416 1px solid;
+      color: white;
+      background-color: #229416;
+    }
+
+    &-left {
+      align-items: end;
+    }
+  }
+}

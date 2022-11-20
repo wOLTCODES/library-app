@@ -9,14 +9,15 @@
     router.url.includes('history') ||
     router.url.includes('profile') ||
     router.url.includes('uploader-book') ||
-    router.url.includes('edit-book')
+    router.url.includes('edit-book') ||
+    router.url.includes('uploader-user')
   "
 >
   <app-sidebar></app-sidebar>
   <app-search-catalog
     *ngIf="router.url.includes('catalog')"
   ></app-search-catalog>
-  <app-search-user *ngIf="router.url.includes('user')"></app-search-user>
+  <app-search-user *ngIf="router.url.includes('users')"></app-search-user>
 
   <router-outlet></router-outlet>
 </div>

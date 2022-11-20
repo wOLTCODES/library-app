@@ -10,6 +10,7 @@ import { UserProfileComponent } from './components/main-page/user-profile/user-p
 import { UsersComponent } from './components/main-page/users/users.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UploaderBookComponent } from './components/search-catalog/uploader-book/uploader-book.component';
+import { UploaderUserComponent } from './components/search-user/uploader-user/uploader-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'catalog', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'uploader-book', component: UploaderBookComponent },
   { path: 'edit-book', component: BookEditComponent },
+  { path: 'uploader-user', component: UploaderUserComponent },
   { path: '**', component: CatalogComponent },
 ];
 
