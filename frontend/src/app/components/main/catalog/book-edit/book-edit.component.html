@@ -1,7 +1,7 @@
 <div class="book-edit">
   <h1>Book edit</h1>
   <div *ngIf="isLoaded.value">
-    <label for="image">Select image</label>
+    <label for="image">Choose new thumbnail</label>
     <br />
     <input
       id="image"
@@ -10,7 +10,6 @@
       accept="image/*"
       class="book-edit__input"
       (change)="processImage($event)"
-      value="{{ this.actualBook ? this.actualBook[0]?.coverImg : '' }}"
     />
     <br />
     <label for="name" class="book-edit__name">Name</label>

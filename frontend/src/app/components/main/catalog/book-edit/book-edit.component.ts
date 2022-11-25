@@ -72,7 +72,7 @@ export class BookEditComponent implements OnInit {
       author: this.author.nativeElement.value,
       pageNumber: this.pageNumber.nativeElement.value,
       publishedYear: this.publishedYear.nativeElement.value,
-      coverImg: this._base64string,
+      coverImg: this.actualBook[0].coverImg || this._base64string,
       copies: this.copies.nativeElement.value,
     };
 
