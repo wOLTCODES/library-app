@@ -1,5 +1,9 @@
-.table__cell {
+.table__cell-small {
   flex: 1;
+}
+
+.table__cell-big {
+  flex: 2;
 }
 
 .table__row {
@@ -8,6 +12,7 @@
   align-items: center;
   height: 60px;
   border: 1px solid lightgray;
+  padding: 10px;
 }
 
 fa-icon {

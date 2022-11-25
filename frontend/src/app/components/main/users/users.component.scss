@@ -17,8 +17,12 @@
     border-top-right-radius: 10px 10px;
   }
 
-  &__cell {
+  &__cell-small {
     flex: 1;
+  }
+
+  &__cell-big {
+    flex: 2;
   }
 
   &__body {
