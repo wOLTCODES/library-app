@@ -12,13 +12,16 @@ import { HttpClient } from '@angular/common/http';
 export class PendingsItemComponent implements OnInit {
   @Input() user: User;
   faCheck = faUserCheck;
+
   constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {}
 
   submitUser(): void {
-    this._http.post<User[]>(`/knihovna/api/user/review/${this.user.id}`, {
-      observe: 'response',
-    });
+    this._http
+      .post(`/knihovna/api/user/review/${this.user.id}`, {
+        observe: 'response',
+      })
+      .subscribe(() => {});
   }
 }
