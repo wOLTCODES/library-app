@@ -1,10 +1,18 @@
 <div class="table" role="table" *ngIf="this.userS.isLoaded.value">
   <div class="table__head" role="rowgroup">
     <div class="table__cell-big" role="columnheader">Username</div>
-    <div class="table__cell-small" role="columnheader">Firstname</div>
-    <div class="table__cell-small" role="columnheader">Lastname</div>
-    <div class="table__cell-big" role="columnheader">Address</div>
-    <div class="table__cell-small" role="columnheader">Birth Number</div>
+    <div class="table__cell-small" role="columnheader">
+      Firstname <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+    </div>
+    <div class="table__cell-small" role="columnheader">
+      Lastname <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+    </div>
+    <div class="table__cell-big" role="columnheader">
+      Address <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+    </div>
+    <div class="table__cell-small" role="columnheader">
+      Birth number <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+    </div>
     <div class="table__cell-small" role="columnheader">Admin</div>
     <div class="table__cell-small" role="columnheader">Banned</div>
     <div class="table__cell-small" role="columnheader">Actions</div>
