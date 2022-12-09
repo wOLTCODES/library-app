@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     console.log(this._registerData);
 
     this._http
-      .post('https://woltcodes.com/knihovna/api/user/register', this._registerData, {
+      .post('/knihovna/api/user/register', this._registerData, {
         observe: 'response',
       })
       .subscribe({
