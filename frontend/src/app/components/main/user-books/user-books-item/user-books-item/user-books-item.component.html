@@ -13,7 +13,11 @@
   </div>
   <div class="table__cell" role="cell">
     <span>
-      <fa-icon [icon]="faReturn"></fa-icon>
+      <fa-icon
+        [icon]="faReturn"
+        (click)="this.returnBook()"
+        *ngIf="!userS.getUser().isAdmin"
+      ></fa-icon>
     </span>
   </div>
 </div>

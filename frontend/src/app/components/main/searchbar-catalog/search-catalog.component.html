@@ -1,12 +1,27 @@
 <div class="search-bar">
-  <input class="search-bar__input" type="text" placeholder="Type name..." />
-  <input class="search-bar__input" type="text" placeholder="Type author..." />
-  <input class="search-bar__input" type="text" placeholder="Type year..." />
-  <button class="search-bar__button">Search</button>
+  <input
+    class="search-bar__input"
+    type="text"
+    placeholder="Type name..."
+    #bookName
+  />
+  <input
+    class="search-bar__input"
+    type="text"
+    placeholder="Type author..."
+    #authorName
+  />
+  <input
+    class="search-bar__input"
+    type="text"
+    placeholder="Type year..."
+    #publishedYear
+  />
+  <button class="search-bar__button" (click)="getParameters()">Search</button>
 
   <span class="search-bar__toggle-text search-bar__toggle-text-right">AND</span>
   <label class="search-bar__toggle">
-    <input type="checkbox" />
+    <input type="checkbox" (click)="toggleStatus($event)" />
     <span
       class="search-bar__toggle-slider search-bar__toggle-slider-round"
     ></span>

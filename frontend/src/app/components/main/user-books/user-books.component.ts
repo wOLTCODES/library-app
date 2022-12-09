@@ -1,36 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {BorrowCurrently} from "../../../model/BorrowCurrently";
+import { BorrowCurrently } from '../../../model/BorrowCurrently';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-user-books',
   templateUrl: './user-books.component.html',
-  styleUrls: ['./user-books.component.scss']
+  styleUrls: ['./user-books.component.scss'],
 })
 export class UserBooksComponent implements OnInit {
+  public borrows: BorrowCurrently[];
 
-  public borrows: BorrowCurrently[]
-
-  constructor(private _http: HttpClient) { }
+  constructor(public bookS: BookService) {}
 
   ngOnInit(): void {
-    this.fetch()
+    this.bookS.fetchBorrowedBooks();
   }
-
-  fetch() {
-    //fetch all books
-    this._http
-      .get<BorrowCurrently[]>('/knihovna/api/borrow/my', {observe: 'response'})
-      .subscribe({
-        next: (response) => {
-          let borrows = response.body
-          if (borrows == null) throw new Error('No body')
-          this.borrows = borrows
-        },
-        error: (error: any) => {
-
-        },
-      });
-  }
-
 }

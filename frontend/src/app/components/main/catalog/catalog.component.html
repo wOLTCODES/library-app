@@ -1,21 +1,24 @@
-<div class="table" role="table" *ngIf="this.bookS.isLoaded.value">
+<div class="table" role="table" *ngIf="bookS.isLoaded.value">
   <div class="table__head" role="rowgroup">
     <div class="table__cell-small" role="columnheader">Thumbnail</div>
     <div class="table__cell-big" role="columnheader">
       Name
       <span
-        ><fa-icon [icon]="faArrowDown" (click)="sortByName()"></fa-icon
+        ><fa-icon [icon]="faArrowDown" (click)="bookS.sortByName()"></fa-icon
       ></span>
     </div>
     <div class="table__cell-big" role="columnheader">
       Author
       <span
-        ><fa-icon [icon]="faArrowDown" (click)="sortByAuthor()"></fa-icon
+        ><fa-icon [icon]="faArrowDown" (click)="bookS.sortByAuthor()"></fa-icon
       ></span>
     </div>
     <div class="table__cell-small" role="columnheader">Number of pages</div>
     <div class="table__cell-small" role="columnheader">
-      Year of publication <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+      Year of publication
+      <span
+        ><fa-icon [icon]="faArrowDown" (click)="bookS.sortByYear()"></fa-icon
+      ></span>
     </div>
     <div class="table__cell-small" role="columnheader">Actions</div>
   </div>
@@ -30,7 +33,7 @@
 </div>
 
 <div class="table">
-  <div class="table__body" *ngIf="!this.bookS.isLoaded.value">
+  <div class="table__body" *ngIf="!bookS.isLoaded.value">
     <div class="table__list">
       <div class="table__loader">
         <div></div>

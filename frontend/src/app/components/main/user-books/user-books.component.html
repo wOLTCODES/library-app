@@ -6,9 +6,20 @@
     <div class="table__cell" role="columnheader">Returns At</div>
     <div class="table__cell" role="columnheader">Actions</div>
   </div>
-  <div class="table__body">
+  <div class="table__body" *ngIf="bookS.isLoaded.value">
     <div class="table__list">
-      <app-user-books-item *ngFor="let borrow of borrows" [borrow]="borrow"></app-user-books-item>
+      <app-user-books-item
+        *ngFor="let borrow of this.bookS.borrows"
+        [borrow]="borrow"
+      ></app-user-books-item>
+    </div>
+  </div>
+  <div class="table__body" *ngIf="!bookS.isLoaded.value">
+    <div class="table__list">
+      <app-user-books-item
+        *ngFor="let borrow of this.bookS.borrows"
+        [borrow]="borrow"
+      ></app-user-books-item>
     </div>
   </div>
 </div>
