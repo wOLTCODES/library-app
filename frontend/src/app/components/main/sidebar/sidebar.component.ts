@@ -13,6 +13,7 @@ import { UserService } from '../../../services/user.service';
 export class SidebarComponent implements OnInit {
   public numberOfPendings: number = 0;
   public pendingsTitle: string;
+  private _interval: any;
 
   constructor(
     private _http: HttpClient,
@@ -44,7 +45,7 @@ export class SidebarComponent implements OnInit {
   }
 
   initInterval() {
-    setInterval(() => {
+    this._interval = setInterval(() => {
       if (this.userService.getUser()) {
         this.fetchNumberOfPendings();
       }
@@ -56,6 +57,7 @@ export class SidebarComponent implements OnInit {
       .get('/knihovna/api/user/logout', { observe: 'response' })
       .subscribe({
         next: (response) => {
+          clearInterval(this._interval);
           this._router.navigate(['login']);
         },
         error: (error: any) => {},
