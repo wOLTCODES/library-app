@@ -42,9 +42,9 @@ export class SearchCatalogComponent implements OnInit {
     const publishedYear = this.publishedYear.nativeElement.value;
     if (publishedYear) {
       if (this.url.length === 19) {
-        this.url += 'publishedYear=' + encodeURIComponent(publishedYear);
+        this.url += 'publishedYear=' + +publishedYear;
       } else {
-        this.url += '&' + 'publishedYear=' + encodeURIComponent(publishedYear);
+        this.url += '&' + 'publishedYear=' + +publishedYear;
       }
     }
 
