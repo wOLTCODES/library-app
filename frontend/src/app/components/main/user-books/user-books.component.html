@@ -1,11 +1,12 @@
 <div class="table" role="table">
-  <div class="table__head" role="rowgroup">
+  <div class="table__head" role="rowgroup" *ngIf="bookS.borrows.length">
     <div class="table__cell" role="columnheader">Username</div>
     <div class="table__cell" role="columnheader">Book Name</div>
     <div class="table__cell" role="columnheader">Created At</div>
     <div class="table__cell" role="columnheader">Returns At</div>
     <div class="table__cell" role="columnheader">Actions</div>
   </div>
+  <div class="table__head" *ngIf="!bookS.borrows.length">No borrowed books</div>
   <div class="table__body" *ngIf="bookS.isLoaded.value">
     <div class="table__list">
       <app-user-books-item
