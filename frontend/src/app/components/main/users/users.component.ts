@@ -1,9 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../../../model/User';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +11,7 @@ export class UsersComponent implements OnInit {
   constructor(public userS: UserService) {}
 
   faArrowDown = faArrowDown;
+  faArrowUp = faArrowUp;
 
   ngOnInit(): void {
     this.userS.fetch();

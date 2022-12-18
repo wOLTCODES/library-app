@@ -1,17 +1,81 @@
-<div class="table" role="table" *ngIf="this.userS.isLoaded.value">
+<div class="table" role="table" *ngIf="this.userS.isLoaded$.value">
   <div class="table__head" role="rowgroup">
     <div class="table__cell-big" role="columnheader">Username</div>
     <div class="table__cell-small" role="columnheader">
-      Firstname <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+      Firstname
+      <span
+        *ngIf="
+          userS.firstnameSortOrder$.value === 'DESC' ||
+          userS.firstnameSortOrder$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="userS.sortByFirstname('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="userS.firstnameSortOrder$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="userS.sortByFirstname('DESC')"
+        ></fa-icon
+      ></span>
     </div>
     <div class="table__cell-small" role="columnheader">
-      Lastname <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+      Lastname
+      <span
+        *ngIf="
+          userS.lastnameSortOrder$.value === 'DESC' ||
+          userS.lastnameSortOrder$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="userS.sortByLastname('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="userS.lastnameSortOrder$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="userS.sortByLastname('DESC')"
+        ></fa-icon
+      ></span>
     </div>
     <div class="table__cell-big" role="columnheader">
-      Address <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+      Address
+      <span
+        *ngIf="
+          userS.addressSortOrder$.value === 'DESC' ||
+          userS.addressSortOrder$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="userS.sortByAddress('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="userS.addressSortOrder$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="userS.sortByAddress('DESC')"
+        ></fa-icon
+      ></span>
     </div>
     <div class="table__cell-small" role="columnheader">
-      Birth number <span><fa-icon [icon]="faArrowDown"></fa-icon></span>
+      Birth number
+      <span
+        *ngIf="
+          userS.birthnumberSortOrder$.value === 'DESC' ||
+          userS.birthnumberSortOrder$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="userS.sortByBirthnumber('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="userS.birthnumberSortOrder$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="userS.sortByBirthnumber('DESC')"
+        ></fa-icon
+      ></span>
     </div>
     <div class="table__cell-small" role="columnheader">Admin</div>
     <div class="table__cell-small" role="columnheader">Banned</div>
@@ -28,7 +92,7 @@
 </div>
 
 <div class="table">
-  <div class="table__body" *ngIf="!this.userS.isLoaded.value">
+  <div class="table__body" *ngIf="!this.userS.isLoaded$.value">
     <div class="table__list">
       <div class="table__loader">
         <div></div>
