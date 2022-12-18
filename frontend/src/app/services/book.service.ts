@@ -13,6 +13,9 @@ export class BookService {
   public actualBookId = new BehaviorSubject<string>('');
   public endpointURLSearch = new BehaviorSubject<string>('/knihovna/api/book?');
   public borrows: BorrowCurrently[];
+  public nameOrderType$ = new BehaviorSubject<string>('');
+  public authorOrderType$ = new BehaviorSubject<string>('');
+  public yearOrderType$ = new BehaviorSubject<string>('');
 
   constructor(private _http: HttpClient) {}
 
@@ -50,10 +53,11 @@ export class BookService {
       });
   }
 
-  public sortByName(): void {
+  public sortByName(orderType: string): void {
     this.isLoaded.next(false);
+    this.nameOrderType$.next(orderType);
     this._http
-      .get<Book[]>(`/knihovna/api/book?orderByType=DESC&orderBy=NAME`, {
+      .get<Book[]>(`/knihovna/api/book?orderByType=${orderType}&orderBy=NAME`, {
         observe: 'response',
       })
       .subscribe({
@@ -69,30 +73,35 @@ export class BookService {
       });
   }
 
-  public sortByAuthor(): void {
+  public sortByAuthor(orderType: string): void {
     this.isLoaded.next(false);
-    this._http
-      .get<Book[]>(`/knihovna/api/book?orderByType=DESC&orderBy=AUTHOR`, {
-        observe: 'response',
-      })
-      .subscribe({
-        next: (response) => {
-          let books = response.body;
-          if (books == null) {
-            throw new Error('No body');
-          }
-          this.books = books;
-          this.isLoaded.next(true);
-        },
-        error: (error: any) => {},
-      });
-  }
-
-  public sortByYear(): void {
-    this.isLoaded.next(false);
+    this.authorOrderType$.next(orderType);
     this._http
       .get<Book[]>(
-        `/knihovna/api/book?orderByType=DESC&orderBy=PUBLISHED_YEAR`,
+        `/knihovna/api/book?orderByType=${orderType}&orderBy=AUTHOR`,
+        {
+          observe: 'response',
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          let books = response.body;
+          if (books == null) {
+            throw new Error('No body');
+          }
+          this.books = books;
+          this.isLoaded.next(true);
+        },
+        error: (error: any) => {},
+      });
+  }
+
+  public sortByYear(orderType: string): void {
+    this.isLoaded.next(false);
+    this.yearOrderType$.next(orderType);
+    this._http
+      .get<Book[]>(
+        `/knihovna/api/book?orderByType=${orderType}&orderBy=PUBLISHED_YEAR`,
         {
           observe: 'response',
         }

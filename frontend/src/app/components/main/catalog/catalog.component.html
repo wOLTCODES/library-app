@@ -4,20 +4,59 @@
     <div class="table__cell-big" role="columnheader">
       Name
       <span
-        ><fa-icon [icon]="faArrowDown" (click)="bookS.sortByName()"></fa-icon
+        *ngIf="
+          bookS.nameOrderType$.value === 'DESC' ||
+          bookS.nameOrderType$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="bookS.sortByName('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="bookS.nameOrderType$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="bookS.sortByName('DESC')"
+        ></fa-icon
       ></span>
     </div>
     <div class="table__cell-big" role="columnheader">
       Author
       <span
-        ><fa-icon [icon]="faArrowDown" (click)="bookS.sortByAuthor()"></fa-icon
+        *ngIf="
+          bookS.authorOrderType$.value === 'DESC' ||
+          bookS.authorOrderType$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="bookS.sortByAuthor('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="bookS.authorOrderType$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="bookS.sortByAuthor('DESC')"
+        ></fa-icon
       ></span>
     </div>
     <div class="table__cell-small" role="columnheader">Number of pages</div>
     <div class="table__cell-small" role="columnheader">
       Year of publication
       <span
-        ><fa-icon [icon]="faArrowDown" (click)="bookS.sortByYear()"></fa-icon
+        *ngIf="
+          bookS.yearOrderType$.value === 'DESC' ||
+          bookS.yearOrderType$.value === ''
+        "
+        ><fa-icon
+          [icon]="faArrowDown"
+          (click)="bookS.sortByYear('ASC')"
+        ></fa-icon
+      ></span>
+      <span *ngIf="bookS.yearOrderType$.value === 'ASC'"
+        ><fa-icon
+          [icon]="faArrowUp"
+          (click)="bookS.sortByYear('DESC')"
+        ></fa-icon
       ></span>
     </div>
     <div class="table__cell-small" role="columnheader">Actions</div>

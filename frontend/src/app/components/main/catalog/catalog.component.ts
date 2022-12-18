@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/book.service';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-catalog',
@@ -11,6 +11,7 @@ export class CatalogComponent implements OnInit {
   @Input() title = '';
 
   faArrowDown = faArrowDown;
+  faArrowUp = faArrowUp;
 
   constructor(public bookS: BookService) {}
 
