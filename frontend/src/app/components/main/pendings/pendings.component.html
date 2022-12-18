@@ -1,5 +1,5 @@
 <div class="table" role="table" *ngIf="isLoaded.value">
-  <div class="table__head" role="rowgroup">
+  <div class="table__head" role="rowgroup" *ngIf="users.length">
     <div class="table__cell" role="columnheader">Username</div>
     <div class="table__cell" role="columnheader">Firstname</div>
     <div class="table__cell" role="columnheader">Lastname</div>
@@ -9,6 +9,7 @@
     <div class="table__cell" role="columnheader">Banned</div>
     <div class="table__cell" role="columnheader">Actions</div>
   </div>
+  <div class="table__head" *ngIf="!users.length">No pendings</div>
   <div class="table__body">
     <div class="table__list">
       <app-pendings-item

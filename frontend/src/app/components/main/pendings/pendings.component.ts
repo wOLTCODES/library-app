@@ -25,6 +25,8 @@ export class PendingsComponent implements OnInit {
       .get<User[]>('/knihovna/api/user/pending', { observe: 'response' })
       .subscribe({
         next: (response) => {
+          console.log(response);
+
           let users = response.body;
           if (users == null) throw new Error('No body');
           this.users = users;
