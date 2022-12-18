@@ -14,6 +14,7 @@ export class UserService {
   public lastnameSortOrder$ = new BehaviorSubject<string>('');
   public addressSortOrder$ = new BehaviorSubject<string>('');
   public birthnumberSortOrder$ = new BehaviorSubject<string>('');
+  public endpointURLSearch = new BehaviorSubject<string>('/knihovna/api/user?');
 
   constructor(private _http: HttpClient) {
     this.updateUser();
@@ -48,6 +49,27 @@ export class UserService {
         next: (response) => {
           let users = response.body;
           if (users == null) throw new Error('No body');
+          this.users = users;
+          this.isLoaded$.next(true);
+        },
+        error: (error: any) => {},
+      });
+  }
+
+  public fetchSearch(): void {
+    this.isLoaded$.next(false);
+    console.log(this.endpointURLSearch.value);
+
+    this._http
+      .get<User[]>(this.endpointURLSearch.value, { observe: 'response' })
+      .subscribe({
+        next: (response) => {
+          let users = response.body;
+          console.log(users);
+
+          if (users == null) {
+            throw new Error('No body');
+          }
           this.users = users;
           this.isLoaded$.next(true);
         },

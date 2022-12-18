@@ -3,27 +3,31 @@
     class="search-bar__input"
     type="search"
     placeholder="Type firstname..."
+    #firstName
   />
   <input
     class="search-bar__input"
     type="search"
     placeholder="Type lastname..."
+    #lastName
   />
   <input
     class="search-bar__input"
     type="search"
     placeholder="Type address..."
+    #address
   />
   <input
     class="search-bar__input"
     type="search"
     placeholder="Type birth number..."
+    #birthNumber
   />
-  <button class="search-bar__button">Search</button>
+  <button class="search-bar__button" (click)="getParameters()">Search</button>
 
   <span class="search-bar__toggle-text search-bar__toggle-text-right">AND</span>
   <label class="search-bar__toggle">
-    <input type="checkbox" />
+    <input type="checkbox" (click)="toggleStatus($event)" />
     <span
       class="search-bar__toggle-slider search-bar__toggle-slider-round"
     ></span>
