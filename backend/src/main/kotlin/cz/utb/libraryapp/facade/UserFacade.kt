@@ -60,7 +60,7 @@ class UserFacadeImpl(
                 }
 
                 if (searchParams.birthNumber != null) {
-                    userSearchQuery.append("{birthNumber:/.*${searchParams.birthNumber}.*/},")
+                    userSearchQuery.append("{birthNumber:${searchParams.birthNumber}},")
                 }
 
                 userSearchQuery.append("]")
