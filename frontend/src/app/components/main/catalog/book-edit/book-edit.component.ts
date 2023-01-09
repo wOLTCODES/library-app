@@ -23,7 +23,7 @@ export class BookEditComponent implements OnInit {
   private _base64string: string;
   private _file: File;
   private _bookData: {};
-  public isLoaded = new BehaviorSubject<boolean>(false);
+  public isLoaded$ = new BehaviorSubject<boolean>(false);
 
   public actualBook: any;
 
@@ -54,7 +54,7 @@ export class BookEditComponent implements OnInit {
   }
 
   public fetch() {
-    this.isLoaded.next(false);
+    this.isLoaded$.next(false);
 
     this._http
       .get<Book[]>('/knihovna/api/book', { observe: 'response' })
@@ -62,7 +62,7 @@ export class BookEditComponent implements OnInit {
         this.actualBook = data.body?.filter(
           (book) => book.id == this._bookS.actualBookId.value
         );
-        this.isLoaded.next(true);
+        this.isLoaded$.next(true);
       });
   }
 

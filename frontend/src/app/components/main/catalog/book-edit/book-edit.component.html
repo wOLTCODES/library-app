@@ -1,6 +1,6 @@
 <div class="book-edit">
   <h1>Book edit</h1>
-  <div *ngIf="isLoaded.value">
+  <div *ngIf="isLoaded$.value">
     <label for="image">Choose new thumbnail</label>
     <br />
     <input
@@ -67,7 +67,7 @@
     </button>
   </div>
 
-  <div class="book-edit__loader" *ngIf="!isLoaded.value">
+  <div class="book-edit__loader" *ngIf="!isLoaded$.value">
     <div></div>
     <div></div>
     <div></div>
