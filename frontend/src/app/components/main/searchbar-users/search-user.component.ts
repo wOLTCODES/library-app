@@ -27,17 +27,17 @@ export class SearchUserComponent implements OnInit {
 
     if (firstName) {
       if (this.url.length === 19) {
-        this.url += 'firstName=' + encodeURIComponent(firstName);
+        this.url += 'firstname=' + encodeURIComponent(firstName);
       } else {
-        this.url += '&' + 'firstName=' + encodeURIComponent(firstName);
+        this.url += '&' + 'firstname=' + encodeURIComponent(firstName);
       }
     }
     const lastName = this.lastName.nativeElement.value;
     if (lastName) {
       if (this.url.length === 19) {
-        this.url += 'lastName=' + encodeURIComponent(lastName);
+        this.url += 'lastname=' + encodeURIComponent(lastName);
       } else {
-        this.url += '&' + 'lastName=' + encodeURIComponent(lastName);
+        this.url += '&' + 'lastname=' + encodeURIComponent(lastName);
       }
     }
     const address = this.address.nativeElement.value;
