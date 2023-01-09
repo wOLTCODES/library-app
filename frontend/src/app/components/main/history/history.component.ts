@@ -13,7 +13,7 @@ export class HistoryComponent implements OnInit {
   public borrows: BorrowHistory[];
   public isLoaded = new BehaviorSubject<boolean>(false);
 
-  constructor(private _http: HttpClient, private _userS: UserService) {}
+  constructor(private _http: HttpClient, public userS: UserService) {}
 
   ngOnInit(): void {
     this.fetch();
@@ -23,9 +23,9 @@ export class HistoryComponent implements OnInit {
     this.isLoaded.next(false);
     this._http
       .get<BorrowHistory[]>(
-        this._userS.getUser().isAdmin
+        this.userS.getUser().isAdmin
           ? '/knihovna/api/borrow/history/all'
-          : `/knihovna/api/borrow/history/${this._userS.getUser().id}`,
+          : `/knihovna/api/borrow/history/${this.userS.getUser().id}`,
         { observe: 'response' }
       )
       .subscribe({
@@ -41,7 +41,7 @@ export class HistoryComponent implements OnInit {
 
   fetch() {
     //fetch history
-    if (!this._userS.getUser()) {
+    if (!this.userS.getUser()) {
       setTimeout(() => {
         this.fetchHistory();
       }, 1000);

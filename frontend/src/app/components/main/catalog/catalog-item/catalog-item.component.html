@@ -20,17 +20,20 @@
     <span>
       <fa-icon
         [icon]="faBorrow"
+        title="Borrow book"
         (click)="this.borrow(book.id)"
         *ngIf="!userS.getUser().isAdmin"
       ></fa-icon>
       <fa-icon
         [icon]="faPencil"
+        title="Edit book"
         (click)="this.edit(book.id)"
         *ngIf="userS.getUser().isAdmin"
       ></fa-icon>
       <fa-icon
         [icon]="faTrash"
         (click)="this.delete(book.id)"
+        title="Delete book"
         *ngIf="userS.getUser().isAdmin"
       ></fa-icon>
     </span>

@@ -1,6 +1,12 @@
 <div class="table" role="table" *ngIf="isLoaded.value">
   <div class="table__head" role="rowgroup">
-    <div class="table__cell" role="columnheader">Username</div>
+    <div
+      class="table__cell"
+      role="columnheader"
+      *ngIf="userS.getUser().isAdmin"
+    >
+      Username
+    </div>
     <div class="table__cell" role="columnheader">Book Name</div>
     <div class="table__cell" role="columnheader">Created At</div>
     <div class="table__cell" role="columnheader">Returned At</div>

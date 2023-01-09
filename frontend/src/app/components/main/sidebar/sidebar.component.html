@@ -2,7 +2,13 @@
   <div class="sidebar__item-center">
     <img src="assets/images/person-icon.png" class="sidebar__person-icon" />
     <p class="sidebar__user">
-      {{ userService.getUser() ? userService.getUser().username : "" }}
+      {{
+        userService.getUser()
+          ? userService.getUser().firstname +
+            " " +
+            userService.getUser().lastname
+          : ""
+      }}
     </p>
     <p class="sidebar__empty-line"></p>
   </div>
