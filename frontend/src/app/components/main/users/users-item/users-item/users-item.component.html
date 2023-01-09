@@ -24,25 +24,25 @@
     <span>
       <fa-icon
         [icon]="faUp"
-        title="promote"
+        title="Promote"
         *ngIf="!user.isAdmin"
         (click)="promote()"
       ></fa-icon>
       <fa-icon
         [icon]="faDown"
-        title="demote"
+        title="Demote"
         *ngIf="user.isAdmin"
         (click)="demote()"
       ></fa-icon>
       <fa-icon
         [icon]="faBan"
-        title="ban"
+        title="Ban"
         *ngIf="!user.isBanned"
         (click)="ban()"
       ></fa-icon>
       <fa-icon
         [icon]="faUnban"
-        title="unban"
+        title="Unban"
         *ngIf="user.isBanned"
         (click)="unban()"
       ></fa-icon>
