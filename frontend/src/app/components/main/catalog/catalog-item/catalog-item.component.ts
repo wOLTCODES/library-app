@@ -8,11 +8,12 @@ import {
   faStepBackward,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Book } from '../../../../model/Book';
 import { UserService } from 'src/app/services/user.service';
 import { BookService } from 'src/app/services/book.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-catalog-item',
@@ -30,7 +31,8 @@ export class CatalogItemComponent implements OnInit {
     private _http: HttpClient,
     public userS: UserService,
     private _bookS: BookService,
-    private _router: Router
+    private _router: Router,
+    private _messageS: MessageService
   ) {}
 
   ngOnInit(): void {}
@@ -39,10 +41,22 @@ export class CatalogItemComponent implements OnInit {
     this._http
       .post(`/knihovna/api/book/borrow/${bookId}`, { observe: 'response' })
       .subscribe({
-        next: (response) => {
-          console.log(response);
+        next: () => {
+          this._messageS.generateMessage(
+            'Successfully borrowed',
+            'successful-message'
+          );
         },
-        error: (error: any) => {},
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            this._messageS.generateMessage(
+              'You have already borrowed this book',
+              'error-message'
+            );
+          } else {
+            throw error;
+          }
+        },
       });
   }
 

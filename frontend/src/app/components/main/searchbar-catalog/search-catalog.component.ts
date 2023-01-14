@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-search-catalog',
@@ -16,7 +17,7 @@ export class SearchCatalogComponent implements OnInit {
 
   public toggleValue$ = new BehaviorSubject<boolean>(false);
 
-  constructor(public bookS: BookService) {}
+  constructor(public bookS: BookService, public userS: UserService) {}
 
   ngOnInit(): void {}
 

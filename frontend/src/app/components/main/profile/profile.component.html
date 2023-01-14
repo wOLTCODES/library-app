@@ -1,0 +1,96 @@
+<div class="profile">
+  <h1>Profile edit</h1>
+  <div *ngIf="isLoaded$.value">
+    <label for="username" class="profile__name">Username</label>
+    <br />
+    <input
+      id="username"
+      #username
+      type="text"
+      class="profile__input"
+      value="{{
+        actualUser
+          ? actualUser[0]?.username || this.userS.getUser().username
+          : ''
+      }}"
+    />
+    <br />
+    <label for="firstname" class="profile__name">Firstname</label>
+    <br />
+    <input
+      id="firstname"
+      #firstname
+      type="text"
+      class="profile__input"
+      value="{{
+        actualUser
+          ? actualUser[0]?.firstname || this.userS.getUser().firstname
+          : ''
+      }}"
+    />
+    <br />
+    <label for="lastname" class="profile__name">Lastname</label>
+    <br />
+    <input
+      id="lastname"
+      #lastname
+      type="text"
+      class="profile__input"
+      value="{{
+        actualUser
+          ? actualUser[0]?.lastname || this.userS.getUser().lastname
+          : ''
+      }}"
+    />
+    <br />
+    <label for="password" class="profile__name">Password</label>
+    <br />
+    <input id="password" #password type="password" class="profile__input" />
+    <br />
+    <label for="repeatedPassword" class="profile__name"
+      >Repeated Password</label
+    >
+    <br />
+    <input
+      id="repeatedPassword"
+      #repeatedPassword
+      type="password"
+      class="profile__input"
+    />
+    <br />
+    <label for="birthNumber" class="profile__name">Birth number</label>
+    <br />
+    <input
+      id="birthNumber"
+      #birthNumber
+      type="number"
+      class="profile__input"
+      value="{{
+        actualUser
+          ? actualUser[0]?.birthNumber || this.userS.getUser().birthNumber
+          : ''
+      }}"
+    />
+    <br />
+    <label for="address" class="profile__name">Address</label>
+    <br />
+    <input
+      id="address"
+      #address
+      type="text"
+      class="profile__input"
+      value="{{
+        actualUser ? actualUser[0]?.address || this.userS.getUser().address : ''
+      }}"
+    />
+
+    <br />
+    <button (click)="submitUser()" class="profile__button">Save changes</button>
+  </div>
+  <div class="profile__loader" *ngIf="!isLoaded$.value">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>

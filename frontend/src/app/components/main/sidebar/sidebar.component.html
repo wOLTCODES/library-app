@@ -35,7 +35,11 @@
     title="{{ getTitle }}"
     routerLink="history"
   ></app-sidebar-item>
-  <app-sidebar-item title="My profile" routerLink="profile"></app-sidebar-item>
+  <app-sidebar-item
+    title="My profile"
+    routerLink="profile"
+    *ngIf="userService.getUser() && !userService.getUser().isAdmin"
+  ></app-sidebar-item>
   <div class="sidebar__item-center">
     <img
       src="assets/images/log-out-icon.png"

@@ -5,9 +5,11 @@ import {
   faHammer,
   faUpLong,
   faUserSlash,
+  faPencil,
 } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/services/user.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-item',
@@ -20,8 +22,13 @@ export class UsersItemComponent implements OnInit {
   faDown = faDownLong;
   faBan = faHammer;
   faUnban = faUserSlash;
+  faPencil = faPencil;
 
-  constructor(private _userS: UserService, private _http: HttpClient) {}
+  constructor(
+    private _userS: UserService,
+    private _http: HttpClient,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -79,5 +86,10 @@ export class UsersItemComponent implements OnInit {
         },
         error: (error: any) => {},
       });
+  }
+
+  public edit(): void {
+    this._userS.actualUserId.next(this.user.id);
+    this._router.navigate(['/', 'profile']);
   }
 }

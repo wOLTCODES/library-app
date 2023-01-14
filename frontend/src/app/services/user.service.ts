@@ -15,6 +15,7 @@ export class UserService {
   public addressSortOrder$ = new BehaviorSubject<string>('');
   public birthnumberSortOrder$ = new BehaviorSubject<string>('');
   public endpointURLSearch = new BehaviorSubject<string>('/knihovna/api/user?');
+  public actualUserId = new BehaviorSubject<string>('');
 
   constructor(private _http: HttpClient) {
     this.updateUser();

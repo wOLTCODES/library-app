@@ -1,5 +1,5 @@
 <div class="table__row">
-  <div class="table__cell" role="cell">
+  <div class="table__cell" role="cell" *ngIf="userS.getUser().isAdmin">
     <span>{{ borrow.userName }}</span>
   </div>
   <div class="table__cell" role="cell">

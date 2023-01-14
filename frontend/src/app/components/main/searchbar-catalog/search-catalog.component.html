@@ -31,5 +31,6 @@
     src="assets/images/plus.png"
     class="search-bar__icon-add"
     routerLink="uploader-book"
+    *ngIf="userS.getUser().isAdmin"
   />
 </div>

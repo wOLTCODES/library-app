@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Book } from '../../../../../model/Book';
 import { User } from '../../../../../model/User';
 import { faUserCheck } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
+import { PendingsService } from 'src/app/services/pendings.service';
 
 @Component({
   selector: 'app-pendings-item',
@@ -13,7 +13,7 @@ export class PendingsItemComponent implements OnInit {
   @Input() user: User;
   faCheck = faUserCheck;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _pendingsS: PendingsService) {}
 
   ngOnInit(): void {}
 
@@ -22,6 +22,8 @@ export class PendingsItemComponent implements OnInit {
       .post(`/knihovna/api/user/review/${this.user.id}`, {
         observe: 'response',
       })
-      .subscribe(() => {});
+      .subscribe(() => {
+        this._pendingsS.fetch();
+      });
   }
 }
