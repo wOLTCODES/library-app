@@ -49,7 +49,7 @@ class BookFacadeImpl(val bookRepository: BookRepository, val borrowedCurrentlyRe
                 }
 
                 if (searchParams.publishedYear != null) {
-                    bookSearchQuery.append("{publishedYear:/.*${searchParams.publishedYear}.*/},")
+                    bookSearchQuery.append("{publishedYear:${searchParams.publishedYear}},")
                 }
 
                 bookSearchQuery.append("]")
