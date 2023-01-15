@@ -11,4 +11,60 @@
   &__label {
     margin-right: 10px;
   }
+  &__button {
+    margin-bottom: 5px;
+    height: 35px;
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+    background-color: gainsboro;
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 0.8em;
+
+    &:hover {
+      border: #229416 1px solid;
+      color: white;
+      background-color: #229416;
+    }
+
+    &-left {
+      align-items: end;
+    }
+  }
+  &__register {
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 5px;
+    font-size: 0.8em;
+ß
+    &:hover {
+      border: #229416 1px solid;
+      color: white;
+      background-color: #229416;
+    }
+
+    &-left {
+      align-items: end;
+    }
+  }
+  &__input {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-color: rgb(220, 220, 220);
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 200px;
+    margin-left: 0;
+    margin-right: 10px;
+    height: 30px;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }

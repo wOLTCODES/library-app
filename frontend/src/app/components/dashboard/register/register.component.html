@@ -1,26 +1,33 @@
 <div class="register">
   <label for="username">Username</label>
-  <input id="username" #username />
+  <br />
+  <input id="username" class="register__input" #username />
   <br />
   <label for="password">Password</label>
-  <input id="password" #password />
+  <br />
+  <input id="password" class="register__input" #password type="password" />
   <br />
   <label for="repeatedPassword">Repeated Password</label>
-  <input id="repeatedPassword" #repeatedPassword />
+  <br />
+  <input id="repeatedPassword" class="register__input" #repeatedPassword type="password" />
   <br />
   <label for="firstname">Firstname</label>
-  <input id="firstname" #firstname />
+  <br />
+  <input id="firstname" class="register__input" #firstname />
   <br />
   <label for="lastname">Lastname</label>
-  <input id="lastname" #lastname />
+  <br />
+  <input id="lastname" class="register__input" #lastname />
   <br />
   <label for="birthNumber">Birth Number</label>
-  <input id="birthNumber" #birthNumber />
+  <br />
+  <input id="birthNumber" class="register__input" #birthNumber />
   <br />
   <label for="address">Address</label>
-  <input id="address" #address />
   <br />
-  <button routerLink="login" (click)="submitRegister()">Register</button>
-  <span>back to login</span>
-    <button routerLink="login">go to login</button>
+  <input id="address" class="register__input" #address />
+  <br />
+  <button routerLink="login" class="register__button" (click)="submitRegister()">Register</button>
+  <br />
+    <span routerLink="login" class="register__register" >Login</span>
 </div>

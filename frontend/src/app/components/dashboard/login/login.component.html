@@ -1,15 +1,15 @@
 <div class="login">
   <div class="login__modal">
     <label class="login__label" for="username">Username</label>
-    <input #username id="username" />
+    <br />
+    <input #username id="username" class="login__input" />
     <br />
     <label for="password">Password</label>
-    <input #password id="password" type="password" />
     <br />
-    <button (click)="submitLogin()">Login</button>
+    <input #password id="password" type="password" class="login__input"/>
     <br />
+    <button (click)="submitLogin()" class="login__button">Login</button>
     <br />
-    <span>no login?</span>
-    <button routerLink="register">go to register</button>
+    <span routerLink="register" class="login__register" >Register</span>
   </div>
 </div>
